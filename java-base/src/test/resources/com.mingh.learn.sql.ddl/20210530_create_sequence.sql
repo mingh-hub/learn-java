@@ -1,3 +1,4 @@
+-- MySql 数据库创建序列
 use learn;
 -- 1. 新建序列表
 drop table if exists sequence;
