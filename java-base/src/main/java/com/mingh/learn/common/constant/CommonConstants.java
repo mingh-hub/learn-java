@@ -44,4 +44,8 @@ public class CommonConstants {
      * DB_PASSWORD
      */
     public static final String DB_PASSWORD = "Ming@hai110";
+    /**
+     * 默认测试目录
+     */
+    public static final String TEST_PATH_DEFAULT = "/Users/user/Desktop/test.txt";
 }

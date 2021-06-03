@@ -1,5 +1,6 @@
 package com.mingh.learn.io;
 
+import com.mingh.learn.common.constant.CommonConstants;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -18,7 +19,7 @@ public class OutputStreamLearnTest {
      **/
     @Test
     public void testOutputWithAppend() {
-        String filePath = "/Users/user/Desktop/test.txt";
+        String filePath = CommonConstants.TEST_PATH_DEFAULT;
         OutputStreamLearn learn = new OutputStreamLearn();
         learn.outputWithAppend(filePath);
     }
@@ -31,7 +32,7 @@ public class OutputStreamLearnTest {
      **/
     @Test
     public void testOutputWithOverride() {
-        String filePath = "/Users/user/Desktop/my.txt";
+        String filePath = CommonConstants.TEST_PATH_DEFAULT;
         OutputStreamLearn learn = new OutputStreamLearn();
         learn.outputWithOverride(filePath);
     }

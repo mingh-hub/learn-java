@@ -1,5 +1,6 @@
 package com.mingh.learn.io;
 
+import com.mingh.learn.common.constant.CommonConstants;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -12,7 +13,7 @@ public class ReaderLearnTest {
 
     @Test
     public void testRead() {
-        String filePath = "/Users/user/Desktop/test.txt";
+        String filePath = CommonConstants.TEST_PATH_DEFAULT;
         ReaderLearn learn = new ReaderLearn();
         learn.read(filePath);
     }
