@@ -33,6 +33,12 @@ public class ReaderLearn {
         Reader reader = null;
         try {
             reader = new FileReader(file);
+            // sourceFile=/Users/user/Desktop/test.txt
+            log.info("file-getName()-{}", file.getName());  // test.txt
+            log.info("file-getParent()-{}",file.getParent());  // /Users/user/Desktop
+            log.info("file-getPath()-{}", file.getPath());  // /Users/user/Desktop/test.txt
+            log.info("file-getAbsolutePath()-{}", file.getAbsolutePath());  // /Users/user/Desktop
+            log.info("file-getParentFile()-{}", file.getParentFile());  // /Users/user/Desktop
             char[] data = new char[2048];
             int len;
             StringBuffer buffer = new StringBuffer();

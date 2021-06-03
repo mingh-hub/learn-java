@@ -27,3 +27,6 @@ hs_err_pid*
 /out/
 
 /learn-java.iml
+
+/java-base/.DS_Store
+/java-base/target/
