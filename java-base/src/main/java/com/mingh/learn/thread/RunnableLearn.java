@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  */
 @Slf4j
 @Builder
-public class ImplRunnable implements Runnable{
+public class RunnableLearn implements Runnable{
     /**
      * 成员变量
      */

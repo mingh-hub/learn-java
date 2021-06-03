@@ -11,7 +11,7 @@ import java.util.concurrent.FutureTask;
  * 线程创建方式测试
  */
 @Slf4j
-public class ThreadTest {
+public class ThreadCreateTest {
 
     /**
      * 通过实现 Callable 的方式创建线程
@@ -21,8 +21,8 @@ public class ThreadTest {
     @Test
     public void testCreateThreadByImplCallable() throws InterruptedException, ExecutionException {
         // 成员变量不共享, 因为创建了两个实例对象
-        FutureTask<Integer> task1 = new FutureTask<>(ImplCallable.builder().build());
-        FutureTask<Integer> task2 = new FutureTask<>(ImplCallable.builder().build());
+        FutureTask<Integer> task1 = new FutureTask<>(CallableLearn.builder().build());
+        FutureTask<Integer> task2 = new FutureTask<>(CallableLearn.builder().build());
         new Thread(task1).start();
         new Thread(task2).start();
         Thread.sleep(3000);
@@ -46,7 +46,7 @@ public class ThreadTest {
                 });
         log.info("========================================================");
         // 成员变量共享, 并且是线程安全的
-        ImplCallable implCallable = ImplCallable.builder().build();
+        CallableLearn implCallable = CallableLearn.builder().build();
         FutureTask<Integer> task3 = new FutureTask<>(implCallable);
         FutureTask<Integer> task4 = new FutureTask<>(implCallable);
         new Thread(task3).start();
@@ -87,7 +87,7 @@ public class ThreadTest {
      */
     @Test
     public void testCreateThreadByImplRunnable() throws InterruptedException {
-        ImplRunnable implRunnable = ImplRunnable.builder().build();
+        RunnableLearn implRunnable = RunnableLearn.builder().build();
         new Thread(implRunnable).start();
         new Thread(implRunnable).start();
         Thread.sleep(3000);
@@ -107,8 +107,8 @@ public class ThreadTest {
      */
     @Test
     public void testCreateThreadByExtendThread() throws InterruptedException {
-        ExtendThread.builder().build().start();
-        ExtendThread.builder().build().start();
+        ThreadLearn.builder().build().start();
+        ThreadLearn.builder().build().start();
         // 调用 start() 后, 线程处于激活状态, 但 junit 已经执行完了, 不会输出任何结果, 需要将线程休眠一段时间, 控制台才会有日志输出
         Thread.sleep(3000);
     }
