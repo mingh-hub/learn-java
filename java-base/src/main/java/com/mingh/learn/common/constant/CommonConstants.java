@@ -45,7 +45,9 @@ public class CommonConstants {
      */
     public static final String DB_PASSWORD = "Ming@hai110";
     /**
-     * 默认测试目录
+     * 默认操作系统测试目录
+     * mac os: /Users/minghai/Desktop/test.txt
+     * windows: C:\Users\Administrator\Desktop\test.txt
      */
-    public static final String TEST_PATH_DEFAULT = "/Users/minghai/Desktop/test.txt";
+    public static final String TEST_PATH_DEFAULT = "C:\\Users\\Administrator\\Desktop\\test.txt";
 }

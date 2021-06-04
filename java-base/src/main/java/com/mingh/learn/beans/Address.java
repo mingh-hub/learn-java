@@ -1,9 +1,9 @@
 package com.mingh.learn.beans;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class Address extends BaseBean{
     private static final long serialVersionUID = -9025878456374359713L;
