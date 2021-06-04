@@ -47,5 +47,5 @@ public class CommonConstants {
     /**
      * 默认测试目录
      */
-    public static final String TEST_PATH_DEFAULT = "/Users/user/Desktop/test.txt";
+    public static final String TEST_PATH_DEFAULT = "/Users/minghai/Desktop/test.txt";
 }

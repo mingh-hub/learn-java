@@ -18,11 +18,16 @@ public class OutputStreamWriterExample {
      * @Date 2021/6/2 20:30
      * @Description 将字符按指定编码转换成字节流存储到缓冲区, 最后刷新到文件
      **/
-    public void transferCharToByte(String targetFile, String content) throws Exception{
+    public void transferCharToByte(String targetFile, String content, String charsetName) throws Exception {
+        // 处理文件
+        File file = new File(targetFile);
+        if (!file.getParentFile().exists()) {
+            file.createNewFile();
+        }
         // 构建字节输出流
-        OutputStream os = new FileOutputStream(targetFile);
-        // 通过 OutputStream 来构建字符输出流, 根据 JDK 文档 todo
-        Writer writer = new BufferedWriter(new OutputStreamWriter(os, Charset.forName("GBK")));
+        OutputStream os = new FileOutputStream(file);
+        // 通过 OutputStream 来构建字符输出流, 根据 JDK 文档建议用 BufferedWriter 包装后会提高效率
+        Writer writer = new BufferedWriter(new OutputStreamWriter(os, Charset.forName(charsetName)));
         // 字符转换为字节存储到缓冲区中（指定编码）
         writer.write(content);
         // 将内存缓冲区的字节流刷新到目标文件

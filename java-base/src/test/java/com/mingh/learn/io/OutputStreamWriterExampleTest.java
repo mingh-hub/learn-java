@@ -21,8 +21,8 @@ public class OutputStreamWriterExampleTest {
     public void testWriteCharToFile() throws Exception {
         String targetFile = CommonConstants.TEST_PATH_DEFAULT;
         String content = "字符转成字节输出";
-
+        String charsetName = "GBK";
         OutputStreamWriterExample learn = new OutputStreamWriterExample();
-        learn.transferCharToByte(targetFile, content);
+        learn.transferCharToByte(targetFile, content, charsetName);
     }
 }
