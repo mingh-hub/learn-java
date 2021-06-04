@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.Objects;
 
 /**
- * @ClassName InputStreamLearn
+ * @ClassName InputStreamExample
  * @Author Hai.Ming
  * @Date 2021/5/31 18:14
  * @Description 字节输入流
@@ -22,7 +22,7 @@ import java.util.Objects;
  *
  */
 @Slf4j
-public class InputStreamLearn {
+public class InputStreamExample {
 
     /**
      * @MethodName copy

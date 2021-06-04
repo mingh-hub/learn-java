@@ -4,13 +4,13 @@ import java.io.*;
 import java.nio.charset.Charset;
 
 /**
- * @ClassName OutputStreamWriterLearn
+ * @ClassName OutputStreamWriterExample
  * @Author Hai.Ming
  * @Date 2021/6/2 20:08
  * @Description java.io.OutputStreamWriter 是字符流通向字节流的桥梁：可使用指定的 charset 将要写入流中的字符编码成字节（编码）。
 *                       它使用的字符集可以由名称指定或显式给定，否则将接受平台默认的字符集。
  */
-public class OutputStreamWriterLearn {
+public class OutputStreamWriterExample {
 
     /**
      * @MethodName transferCharToByte

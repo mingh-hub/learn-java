@@ -4,12 +4,12 @@ import com.mingh.learn.common.constant.CommonConstants;
 import org.junit.jupiter.api.Test;
 
 /**
- * @ClassName OutputStreamWriterLearnTest
+ * @ClassName OutputStreamWriterExampleTest
  * @Author Hai.Ming
  * @Date 2021/6/2 20:34
  * @Description test OutputStreamWriterLearn
  */
-public class OutputStreamWriterLearnTest {
+public class OutputStreamWriterExampleTest {
 
     /**
      * @MethodName testWriteCharToFile
@@ -22,7 +22,7 @@ public class OutputStreamWriterLearnTest {
         String targetFile = CommonConstants.TEST_PATH_DEFAULT;
         String content = "字符转成字节输出";
 
-        OutputStreamWriterLearn learn = new OutputStreamWriterLearn();
+        OutputStreamWriterExample learn = new OutputStreamWriterExample();
         learn.transferCharToByte(targetFile, content);
     }
 }

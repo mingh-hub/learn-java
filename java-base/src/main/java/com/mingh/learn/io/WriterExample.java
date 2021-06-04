@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * @ClassName WriterLearn
+ * @ClassName WriterExample
  * @Author Hai.Ming
  * @Date 2021/6/1 20:10
  * @Description Writer 是字符输出流的抽象基类
@@ -17,7 +17,7 @@ import java.io.IOException;
  *                          3. 字符流是最适合操作中文的, 但并不意味着字节流就无法操作中文
  */
 @Slf4j
-public class WriterLearn {
+public class WriterExample {
 
     /**
      * @MethodName out

@@ -8,13 +8,13 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @ClassName OutputStreamLearn
+ * @ClassName OutputStreamExample
  * @Author Hai.Ming
  * @Date 2021/5/31 20:21
  * @Description 字节输出流
  */
 @Slf4j
-public class OutputStreamLearn {
+public class OutputStreamExample {
 
     private static final String HELLO_WORLD = "Hello World!";
 

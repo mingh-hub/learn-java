@@ -3,12 +3,12 @@ package com.mingh.learn.io;
 import org.junit.jupiter.api.Test;
 
 /**
- * @ClassName InputStreamLearnTest
+ * @ClassName InputStreamExampleTest
  * @Author Hai.Ming
  * @Date 2021/5/31 20:49
  * @Description test InputStreamLearn
  */
-public class InputStreamLearnTest {
+public class InputStreamExampleTest {
 
     /**
      * @MethodName testCopy
@@ -20,7 +20,7 @@ public class InputStreamLearnTest {
     public void testCopy() {
         String sourcePath = "/Users/user/Pictures/head1.jpg";
         String targetPath = "/Users/user/Desktop/head1.jpg";
-        InputStreamLearn learn = new InputStreamLearn();
+        InputStreamExample learn = new InputStreamExample();
         learn.copy(sourcePath, targetPath);
     }
 }

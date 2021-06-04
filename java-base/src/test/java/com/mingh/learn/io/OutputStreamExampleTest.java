@@ -4,12 +4,12 @@ import com.mingh.learn.common.constant.CommonConstants;
 import org.junit.jupiter.api.Test;
 
 /**
- * @ClassName OutputStreamLearnTest
+ * @ClassName OutputStreamExampleTest
  * @Author Hai.Ming
  * @Date 2021/5/31 20:39
  * @Description test OutputStream
  */
-public class OutputStreamLearnTest {
+public class OutputStreamExampleTest {
 
     /**
      * @MethodName testOutputWithAppend
@@ -20,7 +20,7 @@ public class OutputStreamLearnTest {
     @Test
     public void testOutputWithAppend() {
         String filePath = CommonConstants.TEST_PATH_DEFAULT;
-        OutputStreamLearn learn = new OutputStreamLearn();
+        OutputStreamExample learn = new OutputStreamExample();
         learn.outputWithAppend(filePath);
     }
 
@@ -33,7 +33,7 @@ public class OutputStreamLearnTest {
     @Test
     public void testOutputWithOverride() {
         String filePath = CommonConstants.TEST_PATH_DEFAULT;
-        OutputStreamLearn learn = new OutputStreamLearn();
+        OutputStreamExample learn = new OutputStreamExample();
         learn.outputWithOverride(filePath);
     }
 }
