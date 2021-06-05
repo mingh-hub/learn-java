@@ -23,7 +23,7 @@ public class FileExample {
      * @Author Hai.Ming
      * @Date 2021/6/5 11:07 上午
      * @Description 文件复制(测试案例一)
-     *                      (测试目标为 305M 的 DingTalk_v6.0.15.8.dmg)
+     *                      (测试目标为 51.7M 文件)
      *                      测试案例一: 通过 InputStream 和 OutputStream 复制文件并进行单个字节读取, 测试消耗时间
      *                      测试案例二: 通过 InputStream 和 OutputStream 复制文件并进行 1024*2 字节读取, 测试消耗时间
      *                      测试案例三: 通过 BufferedInputStream 和 BufferedOutputStream 复制文件并进行单个字节读取, 测试消耗时间
