@@ -14,6 +14,20 @@ import org.junit.jupiter.api.Test;
 public class FileExampleTest {
 
     /**
+     * @MethodName testCopyByStreamWithOneByte
+     * @Author Hai.Ming
+     * @Date 2021/6/5 11:33 上午
+     * @Description 测试通过 InputStream 和 OutputStream 复制文件并进行单个字节读取
+     **/
+    @Test
+    public void testCopyByStreamWithOneByte() throws Exception {
+        String sourcePath = "/Users/minghai/Downloads/DingTalk_v6.0.15.8.dmg";
+        String targetPath = "/Users/minghai/Downloads/DingTalk_v6.0.15.8_1.dmg";
+        FileExample example = new FileExample();
+        example.copyByStreamWithOneByte(sourcePath, targetPath);
+    }
+
+    /**
      * @MethodName testListAllFilesBySpecifiedPathnameWithFilter
      * @Author Hai.Ming
      * @Date 2021/5/30 23:16
