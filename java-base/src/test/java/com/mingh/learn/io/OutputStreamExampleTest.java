@@ -1,7 +1,11 @@
 package com.mingh.learn.io;
 
 import com.mingh.learn.common.constant.CommonConstants;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 /**
  * @ClassName OutputStreamExampleTest
@@ -9,7 +13,19 @@ import org.junit.jupiter.api.Test;
  * @Date 2021/5/31 20:39
  * @Description test OutputStream
  */
+@DisplayName("字节输出流相关方法测试")
 public class OutputStreamExampleTest {
+
+    @InjectMocks
+    private OutputStreamExample example;
+
+    private String filePath;
+
+    @BeforeEach
+    public void setUp() {
+        filePath = CommonConstants.TEST_PATH_DEFAULT;
+        MockitoAnnotations.openMocks(this);
+    }
 
     /**
      * @MethodName testOutputWithAppend
@@ -18,10 +34,9 @@ public class OutputStreamExampleTest {
      * @Description 测试利用 OutputStream 进行追加输出
      **/
     @Test
+    @DisplayName("追加输出")
     public void testOutputWithAppend() {
-        String filePath = CommonConstants.TEST_PATH_DEFAULT;
-        OutputStreamExample learn = new OutputStreamExample();
-        learn.outputWithAppend(filePath);
+        example.outputWithAppend(filePath);
     }
 
     /**
@@ -31,9 +46,8 @@ public class OutputStreamExampleTest {
      * @Description 测试利用 OutputStream 进行覆盖输出
      **/
     @Test
+    @DisplayName("覆盖输出")
     public void testOutputWithOverride() {
-        String filePath = CommonConstants.TEST_PATH_DEFAULT;
-        OutputStreamExample learn = new OutputStreamExample();
-        learn.outputWithOverride(filePath);
+        example.outputWithOverride(filePath);
     }
 }

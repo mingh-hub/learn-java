@@ -1,7 +1,10 @@
 package com.mingh.learn.io;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
 /**
  * @ClassName InputStreamExampleTest
@@ -9,8 +12,16 @@ import org.junit.jupiter.api.Test;
  * @Date 2021/5/31 20:49
  * @Description test InputStreamLearn
  */
-@DisplayName("test InputStreamLearn")
+@DisplayName("字节输入流测试")
 public class InputStreamExampleTest {
+
+    @InjectMocks
+    private InputStreamExample example;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     /**
      * @MethodName testCopy
@@ -23,7 +34,6 @@ public class InputStreamExampleTest {
     public void testCopy() {
         String sourcePath = "/Users/user/Pictures/head.jpg";
         String targetPath = "/Users/user/Desktop/head1.jpg";
-        InputStreamExample learn = new InputStreamExample();
-        learn.copy(sourcePath, targetPath);
+        example.copy(sourcePath, targetPath);
     }
 }

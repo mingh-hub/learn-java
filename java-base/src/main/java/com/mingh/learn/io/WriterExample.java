@@ -38,6 +38,7 @@ public class WriterExample {
             log.error("字符输出异常", e);
         } finally {
             try {
+                // 字符流在输出的时候如果没有关闭, 内容只是输出到内存中, 并没有到实际目标文件中, 也可以用 flush() 强制刷新
                 writer.close();
             } catch (IOException e) {
                 log.error("FileWriter close failed. ", e);
