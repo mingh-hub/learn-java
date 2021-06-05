@@ -1,20 +1,20 @@
 package com.mingh.learn.stream;
 
 import com.google.common.collect.Lists;
-import com.mingh.learn.common.enums.ResultEnum;
-import com.mingh.learn.common.exception.BusinessRuntimeException;
 import com.mingh.learn.beans.Address;
 import com.mingh.learn.beans.User;
+import com.mingh.learn.common.enums.ResultEnum;
+import com.mingh.learn.common.exception.BusinessRuntimeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * 作用: 根据一定的规则将 Stream 中的元素进行计算后再返回一个唯一的值
@@ -89,11 +89,11 @@ public class ReduceTest {
         // mapToDouble 实现工资求和
         double sumSalaryByMapToDouble = users.stream().mapToDouble(User::getSalary).sum();
         log.info("sumSalaryByMapToDouble=====>" + sumSalaryByMapToDouble);
-        assertEquals(51000, (double) sumSalaryByMapToDouble, 0.0);
+        assertEquals(51000, sumSalaryByMapToDouble, 0.0);
         // reduce 实现工资求和
         Optional<Double> sumSalaryByReduce = users.stream().map(User::getSalary).reduce(Double::sum);
         log.info("sumSalaryByReduce=====>" + sumSalaryByReduce);
-        assertEquals(51000, (double) sumSalaryByReduce.get(), 0.0);
+        assertEquals(51000, sumSalaryByReduce.get(), 0.0);
 
         // max 实现工资求最大值
         Optional<Double> maxSalaryByMax = users.stream().map(User::getSalary).max(Double::compareTo);

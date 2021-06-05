@@ -49,5 +49,5 @@ public class CommonConstants {
      * mac os: /Users/minghai/Desktop/test.txt
      * windows: C:\Users\Administrator\Desktop\test.txt
      */
-    public static final String TEST_PATH_DEFAULT = "/Users/minghai/Desktop/test.txt";
+    public static final String TEST_PATH_DEFAULT = "C:\\Users\\Administrator\\Desktop\\test.txt";
 }

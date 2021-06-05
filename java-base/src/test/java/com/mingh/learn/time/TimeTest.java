@@ -2,7 +2,7 @@ package com.mingh.learn.time;
 
 import com.mingh.learn.common.constant.CommonConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

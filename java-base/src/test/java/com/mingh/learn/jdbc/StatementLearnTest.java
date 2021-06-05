@@ -3,8 +3,8 @@ package com.mingh.learn.jdbc;
 import com.mingh.learn.common.constant.CommonConstants;
 import com.mingh.learn.jdbc.bean.SqlBean;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class StatementLearnTest {
 
     private StatementLearn statementLearn;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         statementLearn = StatementLearn.builder()
                 .dbDriver(CommonConstants.DB_DRIVER)

@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mingh.learn.beans.Book;
 import com.mingh.learn.common.enums.CommonEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.text.Collator;
 import java.util.Comparator;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Java 8 Stream Sorted test
