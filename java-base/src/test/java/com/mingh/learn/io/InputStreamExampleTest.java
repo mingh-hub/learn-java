@@ -18,7 +18,7 @@ public class InputStreamExampleTest {
      **/
     @Test
     public void testCopy() {
-        String sourcePath = "/Users/user/Pictures/head1.jpg";
+        String sourcePath = "/Users/user/Pictures/head.jpg";
         String targetPath = "/Users/user/Desktop/head1.jpg";
         InputStreamExample learn = new InputStreamExample();
         learn.copy(sourcePath, targetPath);
