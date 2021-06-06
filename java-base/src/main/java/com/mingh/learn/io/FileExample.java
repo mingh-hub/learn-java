@@ -17,9 +17,6 @@ import java.util.Objects;
  */
 @Slf4j
 public class FileExample {
-    // 内存流: 什么是内存流? 内存流的使用场景是什么?
-    //
-    // 文件流的操作特点是需要以文件为操作终端, 如果在开发中不需要产生文件但依然需要进行 IO 操作(如网络传输将文件放到内存), 这个时候可以考虑使用内存流
 
     /**
      * @Author: Hai.Ming
