@@ -26,11 +26,11 @@ public class OutputStreamWriterExample {
         }
         // 构建字节输出流
         OutputStream os = new FileOutputStream(file);
-        // 通过 OutputStream 来构建字符输出流, 根据 JDK 文档建议用 BufferedWriter 包装后会提高效率
+        // 通过 OutputStreamWriter 转换流来构建字符输出流, 根据 JDK 文档建议用 BufferedWriter 包装后使用以提高效率
         Writer writer = new BufferedWriter(new OutputStreamWriter(os, Charset.forName(charsetName)));
         // 字符转换为字节存储到缓冲区中（指定编码）
         writer.write(content);
-        // 将内存缓冲区的字节流刷新到目标文件
+        // 将内存缓冲区的字符刷新到目标文件
         writer.flush();
         // 关闭流
         writer.close();

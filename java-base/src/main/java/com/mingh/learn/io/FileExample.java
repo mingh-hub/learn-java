@@ -17,6 +17,39 @@ import java.util.Objects;
  */
 @Slf4j
 public class FileExample {
+    // 内存流: 什么是内存流? 内存流的使用场景是什么?
+    //
+    // 文件流的操作特点是需要以文件为操作终端, 如果在开发中不需要产生文件但依然需要进行 IO 操作(如网络传输将文件放到内存), 这个时候可以考虑使用内存流
+
+    /**
+     * @Author: Hai.Ming
+     * @Date: 2021/6/6 10:22
+     * @Description: 文件拷贝: 如果想要实现文件的拷贝操作, 可以有如下两种思路
+     * 思路一.
+     *      构建一个数组, 将需要拷贝的内容读取到数组之中, 而后一次性输出到目标文件
+     * 思路二.
+     *      采用边读边写的方式进行拷贝
+     * 问题:
+     *      如果采用思路一, 文件大小应控制在 5M 以内, 如果文件量一大, 内存会占满, 会抛出 OOM 异常
+     */
+    public void copy(String sourcePath, String targetPath) throws Exception {
+        // 判断
+        if (StringUtils.isBlank(sourcePath) || StringUtils.isBlank(targetPath)) {
+            throw new BusinessRuntimeException(ResultEnum.PARAMS_IS_MISSING);
+        }
+        // 判断源文件是否存在
+        File sourceFile = new File(sourcePath);
+        if (!sourceFile.exists()) {
+            throw new BusinessRuntimeException(ResultEnum.FILE_NOT_FOUND);
+        }
+        // 判断目标文件父目录是否存在, 如果不存在则创建
+        File targetFile = new File(targetPath);
+        if (!targetFile.getParentFile().exists()) {
+            targetFile.getParentFile().mkdirs();
+        }
+        // 拷贝
+        this.copyByBufferedStreamWithMoreBytes(sourcePath, targetPath);
+    }
 
     /**
      * @MethodName copy
