@@ -41,6 +41,7 @@ public class SerializableExample {
      */
     public void savePerson(Person p, String targetFilePath) throws Exception {
         log.info("Person 序列化");
+        // 这个地方是将二进制数据保存到文件, 所以设置文件输出流; 如果进行网络传输, 需要设置成网络输出流
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(targetFilePath));
         oos.writeObject(p);
         oos.close();

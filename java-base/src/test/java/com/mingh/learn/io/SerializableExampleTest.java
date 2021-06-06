@@ -27,19 +27,19 @@ public class SerializableExampleTest {
     }
 
     @Test
-    @DisplayName("反序列化")
+    @Order(1)
+    @DisplayName("序列化")
+    public void testSavePerson() throws Exception {
+        SerializableExample.Person person = SerializableExample.Person.builder().name("测试").age(12).build();
+        example.savePerson(person, CommonConstants.TEST_PATH_DEFAULT);
+    }
+
+    @Test
     @Order(2)
+    @DisplayName("反序列化")
     public void testGetPerson() throws Exception {
         SerializableExample.Person person = example.getPerson(CommonConstants.TEST_PATH_DEFAULT);
         assertEquals("测试", person.getName());
         assertEquals(12, person.getAge());
-    }
-
-    @Test
-    @DisplayName("序列化")
-    @Order(1)
-    public void testSavePerson() throws Exception {
-        SerializableExample.Person person = SerializableExample.Person.builder().name("测试").age(12).build();
-        example.savePerson(person, CommonConstants.TEST_PATH_DEFAULT);
     }
 }
