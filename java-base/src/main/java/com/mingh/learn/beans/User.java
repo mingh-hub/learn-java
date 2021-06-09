@@ -1,12 +1,14 @@
 package com.mingh.learn.beans;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.List;
 
 @Getter
 @Builder
+@EqualsAndHashCode
 public class User extends BaseBean {
     private static final long serialVersionUID = 4262652985755035330L;
 

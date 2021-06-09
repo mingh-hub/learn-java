@@ -40,6 +40,6 @@ public class SerializableExampleTest {
     public void testGetPerson() throws Exception {
         SerializableExample.Person person = example.getPerson(CommonConstants.TEST_PATH_DEFAULT);
         assertEquals("测试", person.getName());
-        assertEquals(12, person.getAge());
+        assertEquals(null, person.getAge());
     }
 }

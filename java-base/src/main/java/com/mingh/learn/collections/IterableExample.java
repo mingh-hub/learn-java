@@ -13,10 +13,10 @@ import java.util.List;
  * @ClassName IterableExample
  * @Author Hai.Ming
  * @Date 2021/6/9 20:10
- * @Description java.lang.Iterable
+ * @Description java.lang.Iterable JDK1.5
  *                      1. 很多类都实现了 Iterable 接口, 如 Collection, List, Set
  *                      2. Iterator<T> iterator(): 调用此方法会返回一个迭代器-Iterator, 迭代器内的核心方法 hasNext() & next(), 循环遍历使用
- *                      3. default void forEach(Consumer<? super T> action): JDK1.8 提供的默认方法, 入参接收函数式接口(Consumer), 循环遍历使用
+ *                      3. default void forEach(Consumer<? super T> action): JDK1.8 提供的默认方法, 入参接收消费型函数式接口(Consumer), 循环遍历使用
  */
 @Slf4j
 public class IterableExample {

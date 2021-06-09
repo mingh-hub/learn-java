@@ -55,7 +55,7 @@ public class SerializableExample {
         private static final long serialVersionUID = -608519558041705066L;
 
         private String name;
-        private Integer age;
-//        private transient Integer age;
+//        private Integer age;
+        private transient Integer age;
     }
 }
