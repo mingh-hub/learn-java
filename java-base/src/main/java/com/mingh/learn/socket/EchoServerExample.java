@@ -36,7 +36,7 @@ public class EchoServerExample {
                     flag = false;
                     ps.println(String.format("请求客户端: [%s:%s] 已断开连接", clientAddress, port));
                 } else {
-                    ps.println(StringUtils.join("ECHO", ": ", message));
+                    ps.println(StringUtils.join("ECHO: ", message));
                 }
             }
         }
