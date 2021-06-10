@@ -18,6 +18,8 @@ import java.util.TreeSet;
  *                          1.1 保存的元素是不可重复的, List 去重可利用 Set 集合
  *                          1.2 Set 接口并没有像 List 接口那样进行扩充, 而是完整的按照 Collection 接口的标准实现了继承, 没有 get(), set() 方法
  *                          1.3 子类 HashSet 无序且元素不可重复, TreeSet 有序且元素不可重复
+ *                        2. HashSet 与 TreeSet
+ *                          TreeSet 保存自定义对象时, 自定义对象需要实现 Comparable 接口, 比较麻烦, 因此大部分情况都会使用 HashSet
  */
 @Slf4j
 public class SetExample {
