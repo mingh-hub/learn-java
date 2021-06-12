@@ -1,7 +1,6 @@
 package com.mingh.learn.collections;
 
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,14 +33,15 @@ import java.util.TreeSet;
  *                                  NavigableMap 内的 put(K key, V value) 方法内部又是调用 TreeMap 内的 put(K key, V value) 方法, 在 TreeMap put() 方法内部会循环比较
  *                                  add(E e) 方法传入的 e, 如果有相同的 e, 则通过调用 setValue() 更新 e 所对应的 value, 而不会插入新的节点, 以此来达到去重的效果!
  *                          结论:
- *                              所以如果想要实现在 Set 集合内去重的话, 需要重写 hashCode() 和 equals() 方法
+ *                              1. 所以如果 HashSet 想要实现在 Set 集合内去重的话, 需要重写 hashCode() 和 equals() 方法
+ *                              2. 所以如果 TreeSet 想要实现在 Set 集合内去重的话, 需要实现 Comparable 接口
  *                          3.2 为什么利用 TreeSet 保存的对象需要实现 Comparable 接口?
  *                          观察:
  *                              TreeSet 内的 add(E e) 方法是调用 NavigableMap(NavigableMap extends SortedMap extends Map) 的 V put(K key, V value) 方法,
  *                              其内部会调用 compare() 方法, compare() 方法会将添加的元素 e 强制转换为 Comparable 类型, 如果添加的元素没有实现 Comparable
  *                              接口, e cannot be cast to java.lang.Comparable 的异常
  *                          结论:
- *                              1. 若想通过 TreeSet 实例化 Set 接口, 对于自定义对象, 首先得实现 Comparable 接口, 其次得重写 hashCode() 和 equals() 方法
+ *                              1. 若想通过 TreeSet 实例化 Set 接口, 对于自定义对象, 必须得实现 Comparable 接口, 实现了 Comparable 接口就能到达去重和排序的目的
  *                              2. 基于第一点的结论, 我们通常是通过 HashSet 实例化 Set 接口
  *
  *
@@ -111,7 +111,7 @@ public class SetExample {
 
     @Builder
     @ToString
-    @EqualsAndHashCode
+//    @EqualsAndHashCode
     static class Person implements Comparable<Person> {
         private String name;
         private Integer age;
