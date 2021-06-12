@@ -1,6 +1,7 @@
 package com.mingh.learn.collections;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
@@ -111,7 +112,7 @@ public class SetExample {
 
     @Builder
     @ToString
-//    @EqualsAndHashCode
+    @EqualsAndHashCode
     static class Person implements Comparable<Person> {
         private String name;
         private Integer age;
