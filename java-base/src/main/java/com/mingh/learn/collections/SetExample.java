@@ -23,26 +23,26 @@ import java.util.TreeSet;
  *                              比较麻烦, 因此大部分情况都会使用 HashSet
  *                        3. 问题
  *                          3.1 为什么 Set 集合可以实现去重?
- *                          观察:
- *                              a. 观察其实现类 HashSet
- *                                  HashSet 内的 add(E e) 方法的实现依赖 HashMap 的 put(K key, V value) 方法, 会将被添加的元素 e 作为 key,
- *                                  一个 Object 对象作为 value 传入 put(e, PRESENT) 方法, HashMap 内会根据 key 计算出 hash 值 hashVal, 把计算出的 hashVal 和 key
- *                                  当做条件去 map 内循环查找是否已经存在对应的 key 了, 若存在则进行替换, 替换的结果相当于去重了!
- *                              b. 观察其实现类 TreeSet
- *                                  TreeSet 内的 add(E e) 方法是调用 NavigableMap(NavigableMap extends SortedMap extends Map) 的 V put(K key, V value) 方法, 而
- *                                  NavigableMap 内的 put(K key, V value) 方法内部又是调用 TreeMap 内的 put(K key, V value) 方法, 在 TreeMap put() 方法内部会循环比较
- *                                  add(E e) 方法传入的 e, 如果有相同的 e, 则通过调用 setValue() 更新 e 所对应的 value, 而不会插入新的节点, 以此来达到去重的效果!
- *                          结论:
- *                              1. 所以如果 HashSet 想要实现在 Set 集合内去重的话, 需要重写 hashCode() 和 equals() 方法
- *                              2. 所以如果 TreeSet 想要实现在 Set 集合内去重的话, 需要实现 Comparable 接口
+ *                              观察:
+ *                                  a. 观察其实现类 HashSet
+ *                                      HashSet 内的 add(E e) 方法的实现依赖 HashMap 的 put(K key, V value) 方法, 会将被添加的元素 e 作为 key,
+ *                                      一个 Object 对象作为 value 传入 put(e, PRESENT) 方法, HashMap 内会根据 key 计算出 hash 值 hashVal, 把计算出的 hashVal 和 key
+ *                                      当做条件去 map 内循环查找是否已经存在对应的 key 了, 若存在则进行替换, 替换的结果相当于去重了!
+ *                                  b. 观察其实现类 TreeSet
+ *                                      TreeSet 内的 add(E e) 方法是调用 NavigableMap(NavigableMap extends SortedMap extends Map) 的 V put(K key, V value) 方法, 而
+ *                                      NavigableMap 内的 put(K key, V value) 方法内部又是调用 TreeMap 内的 put(K key, V value) 方法, 在 TreeMap put() 方法内部会循环比较
+ *                                      add(E e) 方法传入的 e, 如果有相同的 e, 则通过调用 setValue() 更新 e 所对应的 value, 而不会插入新的节点, 以此来达到去重的效果!
+ *                              结论:
+ *                                  1. 所以如果 HashSet 想要实现在 Set 集合内去重的话, 需要重写 hashCode() 和 equals() 方法
+ *                                  2. 所以如果 TreeSet 想要实现在 Set 集合内去重的话, 需要实现 Comparable 接口
  *                          3.2 为什么利用 TreeSet 保存的对象需要实现 Comparable 接口?
- *                          观察:
- *                              TreeSet 内的 add(E e) 方法是调用 NavigableMap(NavigableMap extends SortedMap extends Map) 的 V put(K key, V value) 方法,
- *                              其内部会调用 compare() 方法, compare() 方法会将添加的元素 e 强制转换为 Comparable 类型, 如果添加的元素没有实现 Comparable
- *                              接口, e cannot be cast to java.lang.Comparable 的异常
- *                          结论:
- *                              1. 若想通过 TreeSet 实例化 Set 接口, 对于自定义对象, 必须得实现 Comparable 接口, 实现了 Comparable 接口就能到达去重和排序的目的
- *                              2. 基于第一点的结论, 我们通常是通过 HashSet 实例化 Set 接口
+ *                              观察:
+ *                                  TreeSet 内的 add(E e) 方法是调用 NavigableMap(NavigableMap extends SortedMap extends Map) 的 V put(K key, V value) 方法,
+ *                                  其内部会调用 compare() 方法, compare() 方法会将添加的元素 e 强制转换为 Comparable 类型, 如果添加的元素没有实现 Comparable
+ *                                  接口, e cannot be cast to java.lang.Comparable 的异常
+ *                              结论:
+ *                                  1. 若想通过 TreeSet 实例化 Set 接口, 对于自定义对象, 必须得实现 Comparable 接口, 实现了 Comparable 接口就能到达去重和排序的目的
+ *                                  2. 基于第一点的结论, 我们通常是通过 HashSet 实例化 Set 接口
  *
  *
  */
