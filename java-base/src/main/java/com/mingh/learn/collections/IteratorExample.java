@@ -35,7 +35,9 @@ public class IteratorExample {
      *                          观察: Iterator 迭代器的 remove() 方法
      *                              迭代器内的 remove() 方法, 除了对游标进行了修改, 每次还对 expectedModCount 进行了修正, 因而删除后不会报错
      *                          总结:
-     *                              循环迭代输出时如果要删除元素, 需要使用 Iterator 中的方法
+     *                              1. 编译器在遇到增强型 for 循环时会自动将其编译成迭代器循环遍历, 会报同样的错误
+     *                              2. 一般 for 循环在删除最后一个元素时, 会报 java.lang.IndexOutOfBoundsException
+     *                              3. 总之循环迭代输出时如果要删除元素, 需使用 Iterator 中的 remove() 方法
      *
      *
      **/
@@ -50,6 +52,12 @@ public class IteratorExample {
                 log.info("output element [{}]", str);
             }
         }
+//        for (int i = 0; i < list.size(); i++) {
+//            if (StringUtils.equals("you", list.get(i))) {
+//                list.remove(list.get(i));
+//            }
+//            log.info("output element [{}]", list.get(i));
+//        }
     }
 
     /**
