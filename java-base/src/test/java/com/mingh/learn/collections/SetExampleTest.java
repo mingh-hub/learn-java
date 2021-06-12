@@ -25,9 +25,15 @@ public class SetExampleTest {
     }
 
     @Test
-    @DisplayName("TreeSet 观察自定义对象的排序和重复定义")
-    public void testDuplicateAndSort() {
-        example.duplicateAndSort();
+    @DisplayName("TreeSet 观察自定义对象的去重")
+    public void testDuplicateAndSortHashSet() {
+        example.duplicateAndSortHashSet();
+    }
+
+    @Test
+    @DisplayName("TreeSet 观察自定义对象的排序和去重")
+    public void testDuplicateAndSortTreeSet() {
+        example.duplicateAndSortTreeSet();
     }
 
     @Test
