@@ -29,7 +29,7 @@ public class SetExample {
      * @Date:  2021/6/11 0:39
      * @Description:  观察 TreeSet  的排序和去重
      *                          1. 如果要实现对象的排序, 需要实现 Comparable 接口
-     *                          2. 如果要实现对象的去重, 对象所有属性都需参与比对
+     *                          2. 如果要实现对象的去重, 按需求使用对象属性进行对比
      */
     public void duplicateAndSort() {
         Set<Person> treeSet = new TreeSet<>();
