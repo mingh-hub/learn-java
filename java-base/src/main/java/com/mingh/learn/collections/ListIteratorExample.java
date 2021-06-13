@@ -2,6 +2,7 @@ package com.mingh.learn.collections;
 
 import com.google.common.collect.Lists;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -22,11 +23,7 @@ public class ListIteratorExample {
      **/
     public void bothWayLoop() {
         List<String> list = Lists.newArrayList();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        list.add("d");
-        list.add("e");
+        Collections.addAll(list, "a", "b", "c", "d", "e");
         ListIterator<String> iter = list.listIterator();
         // 由前向后迭代
         System.out.print("由前向后迭代: ");
