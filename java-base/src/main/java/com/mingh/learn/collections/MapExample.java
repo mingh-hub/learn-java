@@ -1,9 +1,11 @@
 package com.mingh.learn.collections;
 
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.TreeMap;
+import com.google.common.collect.Maps;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import java.util.*;
 
 /**
  * @ClassName MapExample
@@ -19,6 +21,65 @@ import java.util.TreeMap;
  *                          开发之中不可能回避 null 的问题, 所以会更多的使用 HashMap
  */
 public class MapExample {
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/13 14:59
+     * @Description 测试利用自定义的类当做 Map 的 key, 此时自定义的类必须要重写 hashCode() 和 equals()
+     *                      问题: 为什么要重写 hashCode() 和 equals() 才能实现根据自定义对象找到对应的值
+     *                      观察: HashMap 中的 get(Object key)
+     *                              HashMap 中的 get(Object key) 方法, 在根据 key 查找时, 会根据 key 生成 hashVal, 再通过 hashVal 和 key 去判断 Map 内是否已存在对应的 key 了,
+     *                              即 hashVal==oldHashVal && key.equals(oldKey)
+     **/
+    public void useSelfDefineObjectAsKey() {
+        Map<String, Person> map = Maps.newHashMap();
+        map.put(new String("ZS"), Person.builder().name("张三").build());
+        System.out.println(map.get(new String("ZS")));
+
+        Map<Person, String> map2 = Maps.newHashMap();
+        map2.put(Person.builder().name("张三").build(), "ZS");
+        System.out.println(map2.get(Person.builder().name("张三").build()));
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/13 14:49
+     * @Description 利用 forEach() 方法迭代输出 Map
+     **/
+    public void loopOutputWithForEach() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "a");
+        map.put(2, "b");
+        map.put(3, "c");
+        map.put(4, "d");
+        map.put(5, "e");
+        map.forEach((k, v) -> System.out.print("{key=" + k + ", value=" + v + "}, "));
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/13 14:22
+     * @Description 利用 Iterator 实现 Map 的迭代输出
+     *                      问题:
+     *                          1. 如何输出? 本质问题就是如何将 Map 对象转为 Iterator 对象, Iterator 集合是操作对象的, 那就得把 Map 中的键值对转为对象
+     *                              1.1 观察 Map 内是有 entrySet() 方法, 通过改方法是可以返回 Set 集合的, 只不过 Set 集合中的对象被 Map.Entry<K,V> 包了一层
+     *                              1.2 调用 Set 集合内的 iterator() 方法, 返回的是 Iterator<Map.Entry<K,V> 对象
+     *                              1.3 再调用 Map.Entry<K,V> 内的 getKey() 和 getValue() 方法可以获取对应的 key 和 value
+     **/
+    public void loopOutputWithIterator() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "a");
+        map.put(2, "b");
+        map.put(3, "c");
+        map.put(4, "d");
+        map.put(5, "e");
+        Set<Map.Entry<Integer, String>> set = map.entrySet();
+        Iterator<Map.Entry<Integer, String>> iter = set.iterator();
+        while (iter.hasNext()) {
+            Map.Entry<Integer, String> entry = iter.next();
+            System.out.print("{key=" + entry.getKey() + ", value=" + entry.getValue() + "}, ");
+        }
+    }
 
     /**
      * @Author Hai.Ming
@@ -89,5 +150,12 @@ public class MapExample {
         System.out.println("===============保存相同的key===============");
         map.put("first", 1111);
         System.out.println(map);
+    }
+
+    @Builder
+    @ToString
+    @EqualsAndHashCode
+    private static class Person{
+        private String name;
     }
 }

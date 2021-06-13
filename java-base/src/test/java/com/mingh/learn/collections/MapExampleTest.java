@@ -24,6 +24,24 @@ public class MapExampleTest {
     }
 
     @Test
+    @DisplayName("测试利用自定义的类当做 Map 的 key")
+    public void testUseSelfDefineObjectAsKey() {
+        example.useSelfDefineObjectAsKey();
+    }
+
+    @Test
+    @DisplayName("测试利用 forEach 实现 Map 的迭代输出")
+    public void testLoopOutputWithForEach() {
+        example.loopOutputWithForEach();
+    }
+
+    @Test
+    @DisplayName("测试利用 Iterator 实现 Map 的迭代输出")
+    public void testLoopOutputWithIterator() {
+        example.loopOutputWithIterator();
+    }
+
+    @Test
     @DisplayName("测试 TreeMap 相关方法实现")
     public void testTreeMapOperation() {
         example.treeMapOperation();
