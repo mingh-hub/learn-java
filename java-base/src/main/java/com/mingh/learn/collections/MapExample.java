@@ -30,6 +30,8 @@ public class MapExample {
      *                      观察: HashMap 中的 get(Object key)
      *                              HashMap 中的 get(Object key) 方法, 在根据 key 查找时, 会根据 key 生成 hashVal, 再通过 hashVal 和 key 去判断 Map 内是否已存在对应的 key 了,
      *                              即 hashVal==oldHashVal && key.equals(oldKey)
+     *                      结论:
+     *                          在开发之中, Map 主要是用来查找, 优先考虑的 key 的类型为 String, 因为 String 这个类已实现了 hashCode() 和 equals() 且还实现了 Comparable 接口
      **/
     public void useSelfDefineObjectAsKey() {
         Map<String, Person> map = Maps.newHashMap();
