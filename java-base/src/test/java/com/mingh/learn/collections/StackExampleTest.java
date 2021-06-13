@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * @ClassName StackExampleTest
  * @Author Hai.Ming
@@ -21,6 +23,14 @@ public class StackExampleTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    @DisplayName("利用 Stack 的 LIFO 实现字符串反转")
+    public void testReverse() {
+        String str = "abcde";
+        String reverseStr = example.reverse(str);
+        assertEquals(reverseStr, new StringBuffer(str).reverse().toString());
     }
 
     @Test

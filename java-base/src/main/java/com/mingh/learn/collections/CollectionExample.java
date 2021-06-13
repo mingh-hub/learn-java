@@ -23,7 +23,7 @@ import java.util.Iterator;
  *                              b. 如果要想实现一个高性能链表会比较麻烦
  *                              c. 链表之中虽然可以使用 Object 接收, 但是依然会存在强制转型问题
  *                      解决: 在最早的 Java 时代(JDK1.0)为了解决这个问题, 提供了一系列的处理类: Vector, Stack, Hashtable, Enumeration; 在随后的 JDK1.2 开始,
- *                              正式引入了类集框架的概念(Collection, List, Set, Map, Iterator等), Java 就可以很方便的实现动态数组操作; JDK1.5 之后, 由于泛型技术的使用,
+ *                              正式引入了类集框架的概念(Collection, List, Set, Map, Iterator 等), Java 就可以很方便的实现动态数组操作; JDK1.5 之后, 由于泛型技术的使用,
  *                              类集就避免了 Object 类对程序的影响。到了 JDK1.8 时代, 类集又发了变化, 支持了数据流操作, 或者说支持了 MapReduce 操作。
  *                              对于数据结构而言, Node 类的存在是至关重要的。
  *                      2. 类集的本质是什么?
