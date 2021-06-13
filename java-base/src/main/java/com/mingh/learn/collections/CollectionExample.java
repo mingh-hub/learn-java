@@ -31,6 +31,9 @@ import java.util.Iterator;
  *                      3. 什么是 Collection? 是负责进行单值保存的最大父接口。
  *                          |- List: 允许保存重复元素, 数据的保存顺序就是数据的增加顺序(有序)
  *                          |- Set: 不允许保存重复元素, 并且内部的元素可以调整(无序)
+ *                      3. Collection 和 Collections 的区别
+ *                          3.1 Collection 是集合操作的父接口, 可以保存单值数据; 而 Collections 则是集合操作的工具类, 可以操作 List, Set, Map, 里面的一些方法还是比较
+ *                              有意思的, 比如 addAll(), reverse(), binarySearch() etc.
  */
 @Slf4j
 public class CollectionExample {
