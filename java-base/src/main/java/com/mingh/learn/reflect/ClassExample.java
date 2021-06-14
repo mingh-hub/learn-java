@@ -21,6 +21,9 @@ public class ClassExample {
      * @Author Hai.Ming
      * @Date 2021/6/14 14:12
      * @Description 调用类的指定构造实例化对象
+     *                      思考: 为什么类要提供无参构造
+     *                          1. 框架的底层都会用到反射技术, 虽然有参构造也可实例化对象, 但框架并不知道方法的参数个数和参数类型
+     *                          2. 有参构造实例化对象要比调用无参构造麻烦一些
      **/
     public void instanceObjUseConstructorWithParams() throws Exception{
         Class<?> clazz = Class.forName("com.mingh.learn.reflect.Person");
@@ -33,6 +36,7 @@ public class ClassExample {
      * @Author Hai.Ming
      * @Date 2021/6/13 23:03
      * @Description 调用类的无参构造实例化对象
+     *
      **/
     public void instanceObjUseConstructorWithoutParams() throws Exception {
         Class<?> clazz = Class.forName("com.mingh.learn.reflect.Person");
@@ -85,6 +89,10 @@ class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static void test() {
+        System.out.println("Person 类的静态方法执行了......");
     }
 
     @Override
