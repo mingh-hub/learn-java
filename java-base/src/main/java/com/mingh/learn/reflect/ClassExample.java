@@ -2,6 +2,7 @@ package com.mingh.learn.reflect;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Constructor;
 import java.util.Date;
 
 /**
@@ -18,13 +19,25 @@ public class ClassExample {
 
     /**
      * @Author Hai.Ming
-     * @Date 2021/6/13 23:03
-     * @Description 观察通过反射实例化对象
-     *                      1. 反射实例化对象会调用对象的无参构造, 也就是说没有无参构造的类无法通过反射进行实例化
+     * @Date 2021/6/14 14:12
+     * @Description 调用类的指定构造实例化对象
      **/
-    public void instanceObj() throws Exception {
+    public void instanceObjUseConstructorWithParams() throws Exception{
+        Class<?> clazz = Class.forName("com.mingh.learn.reflect.Person");
+        Constructor<?> cons = clazz.getConstructor(String.class);
+        Person p = (Person) cons.newInstance("张三");
+        System.out.println(p);
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/13 23:03
+     * @Description 调用类的无参构造实例化对象
+     **/
+    public void instanceObjUseConstructorWithoutParams() throws Exception {
         Class<?> clazz = Class.forName("com.mingh.learn.reflect.Person");
         Person p = (Person) clazz.newInstance();
+        p.setName("张三");
         System.out.println(p);
     }
 
@@ -63,6 +76,14 @@ class Person {
 
     public Person(String name) {
         System.out.println("Person 类的有参构造执行了......");
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 

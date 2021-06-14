@@ -24,9 +24,15 @@ public class ClassExampleTest {
     }
 
     @Test
-    @DisplayName("测试通过反射实例化对象")
-    public void testInstanceObj() throws Exception {
-        example.instanceObj();
+    @DisplayName("测试通过反射实例化对象-有参")
+    public void testInstanceObjUseConstructorWithParams() throws Exception {
+        example.instanceObjUseConstructorWithParams();
+    }
+
+    @Test
+    @DisplayName("测试通过反射实例化对象-无参")
+    public void testInstanceObjUseConstructorWithoutParams() throws Exception {
+        example.instanceObjUseConstructorWithoutParams();
     }
 
     @Test
