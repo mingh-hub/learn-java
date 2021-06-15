@@ -1,6 +1,9 @@
 package com.mingh.learn.reflect.bean;
 
 import com.mingh.learn.beans.BaseBean;
+import com.mingh.learn.reflect.annotation.LogString;
+
+import java.time.LocalDate;
 
 /**
  * @ClassName Person
@@ -8,6 +11,7 @@ import com.mingh.learn.beans.BaseBean;
  * @Date 2021/6/14 14:35
  * @Description 反射用例对象
  */
+@LogString
 public class Person extends BaseBean {
 
     /**
@@ -59,6 +63,18 @@ public class Person extends BaseBean {
 
     public void publicMethod() {
         System.out.println("Person 类的公有方法被调用了......");
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/15 17:14
+     * @Description 用于测试自定义注解
+     **/
+    @LogString
+    public Person run(String street, LocalDate localDate) {
+        System.out.println("=====>" + this.name + "在 " + localDate + " 开始跑步了");
+        this.name = name;
+        return this;
     }
 
     @Override
