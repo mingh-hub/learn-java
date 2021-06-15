@@ -22,7 +22,7 @@ import java.util.TreeSet;
  *                        2. HashSet 与 TreeSet
  *                          2.1 TreeSet 保存自定义对象时, 自定义对象需要实现 Comparable 接口, 否则会报 cannot be cast to java.lang.Comparable,
  *                              比较麻烦, 因此大部分情况都会使用 HashSet
- *                        3. 问题
+ *                        3. 思考
  *                          3.1 为什么 Set 集合可以实现去重?
  *                              观察:
  *                                  a. 观察其实现类 HashSet
