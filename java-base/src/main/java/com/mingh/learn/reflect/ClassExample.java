@@ -23,7 +23,7 @@ public class ClassExample {
      *                      1. 利用 Object 类中的 getClass() 方法, 此种方式必须先有实例化对象才可使用
      *                      2. 利用 "类.class" 取得
      *                      3. 利用 Class.forName() 方法取得 ★★★★★
-     *                          好处: 可以直接编写字符串!!!
+     *                          好处: 可以直接利用字符串进行设置, 不需要引入对应的类。在 JDBC 里面使用的就是此种方式进行数据库驱动的加载
      **/
     public void instanceClassObj() throws ClassNotFoundException {
         // 方式一

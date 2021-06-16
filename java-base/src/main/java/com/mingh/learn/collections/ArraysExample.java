@@ -12,21 +12,36 @@ import java.util.Arrays;
  * @Date 2021/6/15 19:28
  * @Description java.util.Arrays JDK1.2 ★★★★
  *                      数组操作类, 观察下数据内的一些常用方法
- *                      1. toString()
- *
  */
 public class ArraysExample {
 
-
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/16 20:19
+     * @Description 观察自定义对象的数组排序
+     *                      1. 不管任何情况下, 只要进行对象数组的排序, 一定要使用 Comparable 接口
+     **/
+    public Person[] sort() {
+        // 自定义对象
+        Person[] personArray = {Person.builder().name("张三").age(22).build(),
+                Person.builder().name("王五").age(12).build(),
+                Person.builder().name("李四").age(28).build()};
+        Arrays.sort(personArray);
+        return personArray;
+    }
 
     /**
      * @Author Hai.Ming
      * @Date 2021/6/15 23:48
      * @Description 数组填充
+     *                      1. public static void fill(Object[] a, Object val): 以指定对象填充数组内所有元素
+     *                      2. public static void fill(Object[] a, int fromIndex, int toIndex, Object val): 按指定索引向数组内填充对象
+     *                      3. 注意: 填充对象的类型得一致, 否则会报 java.lang.ArrayStoreException 的异常
      **/
     public Person[] fill(Person p) {
         Person[] pArray = new Person[3];
         Arrays.fill(pArray, p);
+//        Arrays.fill(pArray, "a");  // java.lang.ArrayStoreException: java.lang.String
 //        Arrays.fill(pArray, 0, 1, p);
         System.out.println(Arrays.toString(pArray));
         return pArray;
