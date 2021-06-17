@@ -26,6 +26,15 @@ public class ArraysExampleTest {
     }
 
     @Test
+    @DisplayName("数组排序")
+    public void testSort() {
+        ArraysExample.Person[] personArr = example.sort();
+        assertEquals(ArraysExample.Person.builder().name("张三").age(22).build(), personArr[0]);
+        assertEquals(ArraysExample.Person.builder().name("李四").age(28).build(), personArr[1]);
+        assertEquals(ArraysExample.Person.builder().name("王五").age(12).build(), personArr[2]);
+    }
+
+    @Test
     @DisplayName("观察数组填充")
     public void testFill() {
         ArraysExample.Person p = ArraysExample.Person.builder().name("张三").age(22).build();
