@@ -49,7 +49,12 @@ public class BinaryTreeExampleTest {
         System.out.println(JSON.toJSONString(middleBinaryTree2));
 
         assertEquals(3, middleBinaryTree1.getCount());
+        assertEquals(Person.builder().name("张三").age(22).build(), middleBinaryTree1.getRoot().getData());
+        assertEquals(Person.builder().name("王五").age(12).build(), middleBinaryTree1.getRoot().getLeft().getData());
+        assertEquals(Person.builder().name("李四").age(28).build(), middleBinaryTree1.getRoot().getRight().getData());
         assertEquals(3, middleBinaryTree2.getCount());
-        // todo
+        assertEquals(Person.builder().name("李四").age(28).build(), middleBinaryTree2.getRoot().getData());
+        assertEquals(Person.builder().name("张三").age(22).build(), middleBinaryTree2.getRoot().getLeft().getData());
+        assertEquals(Person.builder().name("王五").age(12).build(), middleBinaryTree2.getRoot().getLeft().getLeft().getData());
     }
 }
