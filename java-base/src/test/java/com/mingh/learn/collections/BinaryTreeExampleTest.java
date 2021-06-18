@@ -35,6 +35,17 @@ public class BinaryTreeExampleTest {
     }
 
     @Test
+    @DisplayName("获取")
+    public void testGet() {
+        BinaryTreeExample.MiddleBinaryTree<Person> middleBinaryTree1 = new BinaryTreeExample.MiddleBinaryTree<>();
+        middleBinaryTree1.add(personMap.get(ZHANG_SAN));
+        middleBinaryTree1.add(personMap.get(WANG_WU));
+        middleBinaryTree1.add(personMap.get(LI_SI));
+        System.out.println(JSON.toJSONString(middleBinaryTree1.get()));
+        assertEquals(3, middleBinaryTree1.getCount());
+    }
+
+    @Test
     @DisplayName("增加")
     public void testAdd() {
         BinaryTreeExample.MiddleBinaryTree<Person> middleBinaryTree1 = new BinaryTreeExample.MiddleBinaryTree<>();

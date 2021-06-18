@@ -2,7 +2,10 @@ package com.mingh.learn.collections;
 
 import com.mingh.learn.beans.BaseBean;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.lang.reflect.Array;
 
 /**
  * @ClassName BinaryTreeExample
@@ -73,12 +76,12 @@ public class BinaryTreeExample {
         /**
          * 保存的数据
          */
-        Object[] dataArray;
+        T[] dataArray;
 
         /**
          * @Author:  Hai.Ming
          * @Date:  2021/6/17 23:48
-         * @Description:  保存数据
+         * @Description:  保存数据 ASC
          */
         public void add(T data) {
             final Node<T> newNode = new Node<>(data);
@@ -90,18 +93,20 @@ public class BinaryTreeExample {
             count++;
         }
 
-//        /**
-//         * @Author:  Hai.Ming
-//         * @Date:  2021/6/18 0:37
-//         * @Description:  获取二叉树中所有对象
-//         */
-//        public T[] get() {
-//            if (this.count > 0) {
-//                dataArray = new Object[this.count];
-//            } else {
-//                return null;
-//            }
-//        }
+        /**
+         * @Author:  Hai.Ming
+         * @Date:  2021/6/18 0:37
+         * @Description:  获取二叉树中所有对象 ASC
+         */
+        public T[] get() {
+            if (this.count > 0) {
+                dataArray = (T[]) Array.newInstance(dataArray.getClass().getComponentType(), this.count);
+                this.root.getNode(dataArray);
+                return dataArray;
+            } else {
+                return null;
+            }
+        }
     }
 }
 
@@ -132,6 +137,28 @@ class Node<T extends Comparable<T>> extends BaseBean{
         this.data = data;
     }
 
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/18 14:18
+     * @Description 将二叉树中的各个结点以数组的方式输出, 按默认升序排列
+     **/
+    public void getNode(T[] nodeArray) {
+        if (this.left != null) {
+            if (this.left.getLeft() == null) {
+                nodeArray[nodeArray.length] = this.left.getData();
+            } else {
+                this.left.getNode(nodeArray);
+            }
+        } else if (this.right != null) {
+            if (this.right.getLeft() == null) {
+                nodeArray[nodeArray.length] = this.right.getData();
+            } else {
+                this.left.getNode(nodeArray);
+            }
+        } else {
+            nodeArray[nodeArray.length] = this.getData();
+        }
+    }
 
     /**
      * @Author:  Hai.Ming
@@ -168,6 +195,7 @@ class Node<T extends Comparable<T>> extends BaseBean{
  **/
 @Getter
 @Builder
+@EqualsAndHashCode
 class Person extends BaseBean implements Comparable<Person> {
     private static final long serialVersionUID = -6613632338547202221L;
 
