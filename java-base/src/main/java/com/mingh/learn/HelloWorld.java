@@ -1,24 +1,32 @@
 package com.mingh.learn;
 
+import com.google.common.collect.Lists;
 import com.mingh.learn.beans.BaseBean;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class HelloWorld {
 
     public static void main(String[] args) {
-        Person person = Person.builder().name("王五").age(12).build();
-        Person[] array = new Person[1];
-        array[0] = person;
-        test(array);
+//        Person person = Person.builder().name("王五").age(12).build();
+//        Person[] array = new Person[1];
+//        array[0] = person;
+//        test(array);
+
+        List<Person> list = Lists.newArrayList();
+        Person p = Person.builder().name("王五").age(12).build();
+        list.add(p);
+        list.add(p);
+        list.add(Person.builder().name("王五").age(12).build());
+        System.out.println(p);
     }
 
 
     public static <T extends Comparable<T>> void test(T[] a) {
-        T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(),
-                a.length);
+        T[] b = (T[]) Array.newInstance(a.getClass().getComponentType(), a.length);
         for (int i = 0; i < a.length; i++) {
             b[i] = a[i];
         }

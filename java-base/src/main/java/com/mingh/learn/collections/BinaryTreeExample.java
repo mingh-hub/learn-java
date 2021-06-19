@@ -4,6 +4,7 @@ import com.mingh.learn.beans.BaseBean;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 /**
  * @ClassName BinaryTreeExample
@@ -40,10 +41,11 @@ import lombok.Getter;
  *                              顺序存储
  */
 @Getter
+@ToString
 public class BinaryTreeExample<T extends Comparable<T>> {
 
     /**
-     * 结点个数
+     * 二叉树结点个数
      */
     private int count;
     /**
@@ -56,18 +58,38 @@ public class BinaryTreeExample<T extends Comparable<T>> {
     int foot;
 
     /**
+     * @Author Hai.Ming
+     * @Date 2021/6/19 16:07
+     * @Description 移除二叉树中的数据-中序
+     *                      1. 入参为空不进行任何操作
+     *                      2. 二叉树中没有元素也不进行任何操作
+     *                      3. 中序查询二叉树中是否包含指定移除的元素
+     *                          3.1 包含: 删除该结点及其后裔
+     *                              a. 叶子结点
+     *                                  |- 度为 0 的结点
+     *                              b. 分支结点
+     *                                  |- 度为 1 的结点(有左子树或者右子树)
+     *                                  |- 度为 2 的结点(左右子树都存在)
+     *                          3.2 不包含: 不做处理
+     **/
+    public void remove(T data) {
+        if (data == null || this.count == 0) return;
+        else this.root.removeNode(new Node(data));
+    }
+
+    /**
      * @Author:  Hai.Ming
      * @Date:  2021/6/17 23:48
-     * @Description:  保存数据 ASC
+     * @Description:  保存数据 ASC, 重复结点不做处理
      */
     public void add(T data) {
         final Node newNode = new Node(data);
         if (this.root == null) {
             this.root = newNode;
+            count++;
         } else {
             this.root.addNode(newNode);
         }
-        count++;
     }
 
     /**
@@ -77,6 +99,7 @@ public class BinaryTreeExample<T extends Comparable<T>> {
      */
     public T[] toArray(T[] dataArray) {
         if (this.count > 0) {
+            this.foot = 0;  // 必须重置 foot, 否则重复调用会报异常: java.lang.ArrayIndexOutOfBoundsException
             this.root.toNodeArray(dataArray);
             return dataArray;
         } else {
@@ -99,16 +122,75 @@ public class BinaryTreeExample<T extends Comparable<T>> {
          */
         T data;
         /**
-         * 左子树, 比根结点小的对象
+         * 父结点
+         */
+        Node parent;
+        /**
+         * 左子树, 比父结点小的对象
          */
         Node left;
         /**
-         * 右子树, 比根结点大的对象
+         * 右子树, 比父结点大的对象
          */
         Node right;
 
         public Node(T data) {
             this.data = data;
+        }
+
+        /**
+         * @Author Hai.Ming
+         * @Date 2021/6/19 16:13
+         * @Description 移除指定结点, 指定结点被移除后, 其指定后裔也会被移除
+         **/
+        public void removeNode(Node node) {
+            if (this.data.compareTo(node.data) > 0) {
+                this.left.removeNode(node);
+            }
+            if (this.data.compareTo(node.data) == 0) {
+                // 叶子结点
+                if (this.left == null && this.right == null) {
+                    if (this == this.parent.left) {
+                        this.parent.left = null;
+                    } else {
+                        this.parent.right = null;
+                    }
+                }
+                // 分支结点(有左子树)
+                if (this.left != null && this.right == null) {
+                    if (this.data.compareTo(this.parent.left.data) == 0) {  // 删除结点为父结点左子树
+                        this.parent.left = this.left;
+                    } else {  // 删除结点为父结点右子树
+                        this.parent.right = this.left;
+                    }
+                    this.left.parent = this.parent;  // 重置父结点
+                }
+                // 分支结点(有右子树)
+                if (this.left == null && this.right != null) {
+                    if (this.data.compareTo(this.parent.left.data) == 0) {  // 删除结点为父结点左子树
+                        this.parent.left = this.right;
+                    } else {  // 删除结点为父结点右子树
+                        this.parent.right = this.right;
+                    }
+                    this.right.parent = this.parent;  // 重置父结点
+                }
+                // 分支结点(既有左子树又有右子树)
+                if (this.left != null && this.right != null) {
+                    if (this.data.compareTo(this.parent.left.data) == 0) {  // 删除结点为父结点左子树
+                        // TODO: 2021/6/19 需要找出 this.right 中最小的叶子结点, 然后th.left 放到其左结点
+                        // TODO: 2021/6/20 重置父结点
+                        this.parent.left = this.right;
+                        this.right.left = this.left;
+                    } else {  // 删除结点为父结点右子树
+                        // TODO: 2021/6/19 需要找出 this.right 中最小的叶子结点, 然后th.left 放到其左结点
+                        // TODO: 2021/6/20 重置父结点
+                        this.parent.right = this.right;
+                    }
+                }
+            }
+            if (this.data.compareTo(node.data) < 0) {
+                this.right.removeNode(node);
+            }
         }
 
         /**
@@ -131,28 +213,26 @@ public class BinaryTreeExample<T extends Comparable<T>> {
         }
 
         /**
-         * @Author:  Hai.Ming
-         * @Date:  2021/6/18 0:05
-         * @Description:  left -> right (ASC)
+         * @Author: Hai.Ming
+         * @Date: 2021/6/18 0:05
+         * @Description: left -> right (ASC), 重复结点不做处理
          */
-        public void addNode(Node node) {
-            if (this.data.compareTo(node.getData()) > 0) {
+        public void addNode(Node newNode) {
+            if (this.data.compareTo(newNode.getData()) > 0) {
                 if (this.left == null) {
-                    this.left = node;
+                    this.left = newNode;
+                    this.left.parent = this;  // 父结点的设置必须用 this
+                    count++;
                 } else {
-                    this.left.addNode(node);
+                    this.left.addNode(newNode);
                 }
-            } else if (this.data.compareTo(node.getData()) < 0) {
+            } else if (this.data.compareTo(newNode.getData()) < 0) {
                 if (this.right == null) {
-                    this.right = node;
+                    this.right = newNode;
+                    this.right.parent = this;
+                    count++;
                 } else {
-                    this.right.addNode(node);
-                }
-            } else {
-                if (this.left == null) {
-                    this.left = node;
-                } else {
-                    this.left.addNode(node);
+                    this.right.addNode(newNode);
                 }
             }
         }
