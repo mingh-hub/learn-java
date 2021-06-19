@@ -35,25 +35,30 @@ public class BinaryTreeExampleTest {
     }
 
     @Test
-    @DisplayName("获取")
-    public void testGet() {
-        BinaryTreeExample.MiddleBinaryTree<Person> middleBinaryTree1 = new BinaryTreeExample.MiddleBinaryTree<>();
-        middleBinaryTree1.add(personMap.get(ZHANG_SAN));
-        middleBinaryTree1.add(personMap.get(WANG_WU));
-        middleBinaryTree1.add(personMap.get(LI_SI));
-        System.out.println(JSON.toJSONString(middleBinaryTree1.get()));
-        assertEquals(3, middleBinaryTree1.getCount());
+    @DisplayName("二叉树转数组")
+    public void testToArray() {
+        BinaryTreeExample<Person> middleBinaryTree = new BinaryTreeExample<>();
+        middleBinaryTree.add(personMap.get(ZHANG_SAN));
+        middleBinaryTree.add(personMap.get(WANG_WU));
+        middleBinaryTree.add(personMap.get(LI_SI));
+        Person[] p = new Person[middleBinaryTree.getCount()];
+        Person[] people = middleBinaryTree.toArray(p);
+        System.out.println(JSON.toJSONString(people));
+        assertEquals(3, middleBinaryTree.getCount());
+        assertEquals(people[0], Person.builder().name("王五").age(12).build());
+        assertEquals(people[1], Person.builder().name("张三").age(22).build());
+        assertEquals(people[2], Person.builder().name("李四").age(28).build());
     }
 
     @Test
     @DisplayName("增加")
     public void testAdd() {
-        BinaryTreeExample.MiddleBinaryTree<Person> middleBinaryTree1 = new BinaryTreeExample.MiddleBinaryTree<>();
+        BinaryTreeExample<Person> middleBinaryTree1 = new BinaryTreeExample<>();
         middleBinaryTree1.add(personMap.get(ZHANG_SAN));
         middleBinaryTree1.add(personMap.get(WANG_WU));
         middleBinaryTree1.add(personMap.get(LI_SI));
         System.out.println(JSON.toJSONString(middleBinaryTree1));
-        BinaryTreeExample.MiddleBinaryTree<Person> middleBinaryTree2 = new BinaryTreeExample.MiddleBinaryTree<>();
+        BinaryTreeExample<Person> middleBinaryTree2 = new BinaryTreeExample<>();
         middleBinaryTree2.add(personMap.get(LI_SI));
         middleBinaryTree2.add(personMap.get(ZHANG_SAN));
         middleBinaryTree2.add(personMap.get(WANG_WU));

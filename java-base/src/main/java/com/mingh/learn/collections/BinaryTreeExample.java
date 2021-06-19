@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.lang.reflect.Array;
-
 /**
  * @ClassName BinaryTreeExample
  * @Author Hai.Ming
@@ -41,148 +39,121 @@ import java.lang.reflect.Array;
  *                          4. 二叉树的存储方式
  *                              顺序存储
  */
-public class BinaryTreeExample {
-
-    /**
-     * @Author Hai.Ming
-     * @Date 2021/6/17 20:24
-     * @Description 二叉树算法-前序(root -> left -> right)
-     **/
-    public static class PreBinaryTree<T extends Comparable<T>> {
-        /**
-         * 结点个数
-         */
-        private int count;
-
-        private Node<T> root;
-
-    }
-
-    /**
-     * @Author:  Hai.Ming
-     * @Date:  2021/6/17 0:17
-     * @Description: 二叉树算法-中序(left -> root -> right)
-     */
-    @Getter
-    public static class MiddleBinaryTree<T extends Comparable<T>>{
-        /**
-         * 结点个数
-         */
-        private int count;
-        /**
-         * 根结点, 必须要保留住根结点
-         */
-        private Node<T> root;
-        /**
-         * 保存的数据
-         */
-        T[] dataArray;
-
-        /**
-         * @Author:  Hai.Ming
-         * @Date:  2021/6/17 23:48
-         * @Description:  保存数据 ASC
-         */
-        public void add(T data) {
-            final Node<T> newNode = new Node<>(data);
-            if (this.root == null) {
-                this.root = newNode;
-            } else {
-                this.root.addNode(newNode);
-            }
-            count++;
-        }
-
-        /**
-         * @Author:  Hai.Ming
-         * @Date:  2021/6/18 0:37
-         * @Description:  获取二叉树中所有对象 ASC
-         */
-        public T[] get() {
-            if (this.count > 0) {
-                dataArray = (T[]) Array.newInstance(dataArray.getClass().getComponentType(), this.count);
-                this.root.getNode(dataArray);
-                return dataArray;
-            } else {
-                return null;
-            }
-        }
-    }
-}
-
-/**
- * @Author Hai.Ming
- * @Date 2021/6/16 20:41
- * @Description Node 结点 ★★★★★
- *                        1. 数据结构中必须要有 Node 类, 无论是集合还是数组的操作都离不开 Node 结点
- *                        2. 这个类负责保存数据及结点的关系匹配
- **/
 @Getter
-class Node<T extends Comparable<T>> extends BaseBean{
-    private static final long serialVersionUID = 2049264298161879393L;
-    /**
-     * 结点存储对象
-     */
-    T data;
-    /**
-     * 左子树
-     */
-    Node<T> left;
-    /**
-     * 右子树
-     */
-    Node<T> right;
+public class BinaryTreeExample<T extends Comparable<T>> {
 
-    public Node(T data) {
-        this.data = data;
+    /**
+     * 结点个数
+     */
+    private int count;
+    /**
+     * 根结点, 必须要保留住根结点
+     */
+    private Node root;
+    /**
+     * 指针
+     */
+    int foot;
+
+    /**
+     * @Author:  Hai.Ming
+     * @Date:  2021/6/17 23:48
+     * @Description:  保存数据 ASC
+     */
+    public void add(T data) {
+        final Node newNode = new Node(data);
+        if (this.root == null) {
+            this.root = newNode;
+        } else {
+            this.root.addNode(newNode);
+        }
+        count++;
     }
 
     /**
-     * @Author Hai.Ming
-     * @Date 2021/6/18 14:18
-     * @Description 将二叉树中的各个结点以数组的方式输出, 按默认升序排列
-     **/
-    public void getNode(T[] nodeArray) {
-        if (this.left != null) {
-            if (this.left.getLeft() == null) {
-                nodeArray[nodeArray.length] = this.left.getData();
-            } else {
-                this.left.getNode(nodeArray);
-            }
-        } else if (this.right != null) {
-            if (this.right.getLeft() == null) {
-                nodeArray[nodeArray.length] = this.right.getData();
-            } else {
-                this.left.getNode(nodeArray);
-            }
+     * @Author: Hai.Ming
+     * @Date: 2021/6/18 0:37
+     * @Description: 将二叉树转为数组输出, left -> right (ASC)
+     */
+    public T[] toArray(T[] dataArray) {
+        if (this.count > 0) {
+            this.root.toNodeArray(dataArray);
+            return dataArray;
         } else {
-            nodeArray[nodeArray.length] = this.getData();
+            return null;
         }
     }
 
     /**
-     * @Author:  Hai.Ming
-     * @Date:  2021/6/18 0:05
-     * @Description:  left -> right (ASC)
-     */
-    public void addNode(Node<T> node) {
-        if (this.data.compareTo(node.getData()) > 0) {
-            if (this.left == null) {
-                this.left = node;
-            } else {
-                this.left.addNode(node);
+     * @Author Hai.Ming
+     * @Date 2021/6/16 20:41
+     * @Description Node 结点 ★★★★★
+     *                        1. 数据结构中必须要有 Node 类, 无论是集合还是数组的操作都离不开 Node 结点
+     *                        2. 这个类负责保存数据及结点的关系匹配
+     **/
+    @Getter
+    class Node extends BaseBean{
+        private static final long serialVersionUID = 2049264298161879393L;
+        /**
+         * 结点存储对象
+         */
+        T data;
+        /**
+         * 左子树, 比根结点小的对象
+         */
+        Node left;
+        /**
+         * 右子树, 比根结点大的对象
+         */
+        Node right;
+
+        public Node(T data) {
+            this.data = data;
+        }
+
+        /**
+         * @Author Hai.Ming
+         * @Date 2021/6/18 14:18
+         * @Description 将二叉树中的各个结点以数组的方式输出, 按默认升序排列, left -> right (ASC)
+         *                      1. 中序输出, left -> root -> right
+         *                      2. 判断左子树, 不为空则交给左子树完成
+         *                      3. 将当前 root 结点中保存的对象放入数组
+         *                      4. 判断右子树, 不为空则交给右子树完成
+         **/
+        public void toNodeArray(T[] result) {
+            if (this.left != null) {
+                this.left.toNodeArray(result);
             }
-        } else if (this.data.compareTo(node.getData()) < 0) {
-            if (this.right == null) {
-                this.right = node;
-            } else {
-                this.right.addNode(node);
+            result[foot++] = this.data;
+            if (this.right != null) {
+                this.right.toNodeArray(result);
             }
-        } else {
-            if (this.left == null) {
-                this.left = node;
+        }
+
+        /**
+         * @Author:  Hai.Ming
+         * @Date:  2021/6/18 0:05
+         * @Description:  left -> right (ASC)
+         */
+        public void addNode(Node node) {
+            if (this.data.compareTo(node.getData()) > 0) {
+                if (this.left == null) {
+                    this.left = node;
+                } else {
+                    this.left.addNode(node);
+                }
+            } else if (this.data.compareTo(node.getData()) < 0) {
+                if (this.right == null) {
+                    this.right = node;
+                } else {
+                    this.right.addNode(node);
+                }
             } else {
-                this.left.addNode(node);
+                if (this.left == null) {
+                    this.left = node;
+                } else {
+                    this.left.addNode(node);
+                }
             }
         }
     }
