@@ -82,9 +82,9 @@ public class ThreadExample {
         MyThread4 mt1 = new MyThread4();
         MyThread4 mt2 = new MyThread4();
         MyThread4 mt3 = new MyThread4();
-        new Thread(mt1).start();
-        new Thread(mt2).start();
-        new Thread(mt3).start();
+        new Thread(mt1, "线程A").start();
+        new Thread(mt2, "线程B").start();
+        new Thread(mt3, "线程C").start();
     }
 }
 
@@ -101,6 +101,11 @@ public class ThreadExample {
  *                              取的名字: public final String getName()
  *                              既然线程的执行本身是不确定的状态, 所以如果要取的线程的名字的话, 那么唯一能做到的就是取得当前线程的名字: public static Thread currentThread(),
  *                              如果在设置线程对象时没有给定名称, 会有默认值
+ *                      2. 线程的休眠
+ *                          public static void sleep(long millis) throws InterruptedException
+ *                      3. 线程的中断
+ *                          public void interrupt(): 线程的中断一定是被其它线程中断
+ *
  **/
 class MyThread4 implements Runnable{
 
