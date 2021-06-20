@@ -1,7 +1,6 @@
 package com.mingh.learn.thread;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.stream.Stream;
 
@@ -74,7 +73,7 @@ public class ThreadExample {
         Thread.sleep(100);
         System.out.println("task1 execute result: " + task1.get());
         System.out.println("task2 execute result: " + task2.get());
-        System.out.println("task3 execute result: " + task1.get());
+        System.out.println("task3 execute result: " + task3.get());
     }
 }
 
@@ -82,7 +81,10 @@ public class ThreadExample {
  * @Author Hai.Ming
  * @Date 2021/6/21 00:01
  * @Description java.util.Callable JDK1.5
- *                      1.
+ *                      1. 实现 Callable 接口比较复杂, 要利用 FutureTask 来包装下 new FutureTask(Callable call)
+ *                      2. FutureTask<V> 的两个构造器分别接收 Callable 类型的参数和 Runnable 类型的参数, 接收 Runnable 类型参数时还需指定返回值
+ *                      3. FutureTask<V> 实现了 RunnableFuture<V> 接口, 而 RunnableFuture<V> 接口继承了 Runnable 和 Future<V> 接口
+ *                      4. Thread 又实现了 Runnable 接口且 Thread 类的构造器接收 Runnable 类型的参数
  **/
 class MyThread3 implements Callable<String> {
 
@@ -95,7 +97,7 @@ class MyThread3 implements Callable<String> {
     @Override
     public String call() throws Exception {
         Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println(this.name + ", X=" + i));
-        return "execute done.";
+        return Thread.currentThread().getName() + " execute done.";
     }
 }
 
