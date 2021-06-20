@@ -6,7 +6,7 @@ import java.util.stream.Stream;
  * @ClassName ThreadExample
  * @Author Hai.Ming
  * @Date 2021/6/20 16:19
- * @Description 多线程
+ * @Description 多线程 ★★★★★
  *                      1. 进程与线程的区别
  *                          1.1 DOS 系统有个特点: 只要电脑有病毒, 那么电脑就死机了。是因为 DOS 是单进程操作系统, 即在同一个时间段内, 只允许有一个程序运行。而后来到了 windows 时代,
  *                          电脑即使有病毒了也可使用, 但是会变慢。因为在一个 CPU, 一块资源的情况下, 程序利用一些轮转算法, 可以让一个资源在一个时间段上处理不同的程序(进程), 但是
@@ -62,6 +62,8 @@ public class ThreadExample {
         new Thread(() -> Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println("Lambda, X=" + i))).start();
     }
 }
+
+
 
 /**
  * @Author Hai.Ming
