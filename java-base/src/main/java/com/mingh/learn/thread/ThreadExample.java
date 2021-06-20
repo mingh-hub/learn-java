@@ -1,5 +1,8 @@
 package com.mingh.learn.thread;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 import java.util.stream.Stream;
 
 /**
@@ -42,7 +45,7 @@ import java.util.stream.Stream;
  */
 public class ThreadExample {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         // 继承 Thread 来实现多线程
 //        MyThread1 mt1 = new MyThread1("线程A");
 //        MyThread1 mt2 = new MyThread1("线程B");
@@ -52,23 +55,54 @@ public class ThreadExample {
 //        mt3.start();
 
         // 实现 Runnable 接口来实现多线程
-        MyThread2 mt1 = new MyThread2("线程A");
-        MyThread2 mt2 = new MyThread2("线程B");
-        MyThread2 mt3 = new MyThread2("线程C");
-        new Thread(mt1).start();
-        new Thread(mt2).start();
-        new Thread(mt3).start();
+//        MyThread2 mt1 = new MyThread2("线程A");
+//        MyThread2 mt2 = new MyThread2("线程B");
+//        MyThread2 mt3 = new MyThread2("线程C");
+//        new Thread(mt1).start();
+//        new Thread(mt2).start();
+//        new Thread(mt3).start();
         // Lambda 写法
-        new Thread(() -> Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println("Lambda, X=" + i))).start();
+//        new Thread(() -> Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println("Lambda, X=" + i))).start();
+
+        // 通过 Callable 实现多线程
+        FutureTask<String> task1 = new FutureTask<>(new MyThread3("线程A"));
+        FutureTask<String> task2 = new FutureTask<>(new MyThread3("线程B"));
+        FutureTask<String> task3 = new FutureTask<>(new MyThread3("线程C"));
+        new Thread(task1).start();
+        new Thread(task2).start();
+        new Thread(task3).start();
+        Thread.sleep(100);
+        System.out.println("task1 execute result: " + task1.get());
+        System.out.println("task2 execute result: " + task2.get());
+        System.out.println("task3 execute result: " + task1.get());
     }
 }
 
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/21 00:01
+ * @Description java.util.Callable JDK1.5
+ *                      1.
+ **/
+class MyThread3 implements Callable<String> {
 
+    private String name;
+
+    public MyThread3(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String call() throws Exception {
+        Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println(this.name + ", X=" + i));
+        return "execute done.";
+    }
+}
 
 /**
  * @Author Hai.Ming
  * @Date 2021/6/20 22:27
- * @Description 实现 Runnable 接口来实现多线程
+ * @Description 实现 java.lang.Runnable 接口来实现多线程
  **/
 class MyThread2 implements Runnable {
 
@@ -87,7 +121,7 @@ class MyThread2 implements Runnable {
 /**
  * @Author Hai.Ming
  * @Date 2021/6/20 22:27
- * @Description 继承 Thread 来实现多线程
+ * @Description 继承 java.lang.Thread 来实现多线程
  **/
 class MyThread1 extends Thread {
 
