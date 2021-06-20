@@ -94,7 +94,7 @@ public class ThreadCreateTest {
     }
 
     /**
-     * 通过集成 Thread 类来创建线程
+     * 通过继承 Thread 类来创建线程
      * 1. 成员变量 i 在线程间不会共享
      * 2. 当通过继承Thread类的方式实现多线程时，可以直接使用this获取当前执行的线程
      *
