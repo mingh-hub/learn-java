@@ -11,10 +11,13 @@ import java.util.stream.Stream;
  * @Description 多线程 ★★★★★
  *                      1. 进程与线程的区别
  *                          1.1 DOS 系统有个特点: 只要电脑有病毒, 那么电脑就死机了。是因为 DOS 是单进程操作系统, 即在同一个时间段内, 只允许有一个程序运行。而后来到了 windows 时代,
- *                          电脑即使有病毒了也可使用, 但是会变慢。因为在一个 CPU, 一块资源的情况下, 程序利用一些轮转算法, 可以让一个资源在一个时间段上处理不同的程序(进程), 但是
- *                          在一个时间点上只允许有一个进程去执行。
+ *                              电脑即使有病毒了也可使用, 但是会变慢。因为在一个 CPU, 一块资源的情况下, 程序利用一些轮转算法, 可以让一个资源在一个时间段上处理不同的程序(进程), 但是
+ *                              在一个时间点上只允许有一个进程去执行。
  *                          1.2 在每一个进程上可以划分出若干个线程, 而线程的执行是要比进程更快的, 所以多线程的操作性能是要超过多进程。但是所有的线程都一定是要在进程的基础之上
- *                          进行划分, 即线程是依赖于进程而存在的。
+ *                              进行划分, 即线程是依赖于进程而存在的。
+ *                          1.3 每当使用 java 命令在 JVM 上解释某一个程序执行的时候, 那么都会默认启动一个 JVM 的进程, 而主方法只是这进程中的一个线程, 所以整个程序一直都跑在线程的运行
+ *                              机制上。
+ *                              每一个 JVM 至少会启动两个线程: 主线程, GC 线程
  *                      2. 在 Java 中对于多线程的实现一定要有个线程的主类, 而这个线程的主类往往是需要操作一些资源。但是对于这个多线程主类的实现是有一定要求的:
  *                          2.1 继承 Thread 父类(有单继承局限性)
  *                          2.2 实现 Runnable 接口(推荐使用)
@@ -64,16 +67,46 @@ public class ThreadExample {
 //        new Thread(() -> Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println("Lambda, X=" + i))).start();
 
         // 通过 Callable 实现多线程
-        FutureTask<String> task1 = new FutureTask<>(new MyThread3("线程A"));
-        FutureTask<String> task2 = new FutureTask<>(new MyThread3("线程B"));
-        FutureTask<String> task3 = new FutureTask<>(new MyThread3("线程C"));
-        new Thread(task1).start();
-        new Thread(task2).start();
-        new Thread(task3).start();
-        Thread.sleep(100);
-        System.out.println("task1 execute result: " + task1.get());
-        System.out.println("task2 execute result: " + task2.get());
-        System.out.println("task3 execute result: " + task3.get());
+//        FutureTask<String> task1 = new FutureTask<>(new MyThread3("线程A"));
+//        FutureTask<String> task2 = new FutureTask<>(new MyThread3("线程B"));
+//        FutureTask<String> task3 = new FutureTask<>(new MyThread3("线程C"));
+//        new Thread(task1).start();
+//        new Thread(task2).start();
+//        new Thread(task3).start();
+//        Thread.sleep(100);
+//        System.out.println("task1 execute result: " + task1.get());
+//        System.out.println("task2 execute result: " + task2.get());
+//        System.out.println("task3 execute result: " + task3.get());
+
+        // 观察线程的命名及取的
+        MyThread4 mt1 = new MyThread4();
+        MyThread4 mt2 = new MyThread4();
+        MyThread4 mt3 = new MyThread4();
+        new Thread(mt1).start();
+        new Thread(mt2).start();
+        new Thread(mt3).start();
+    }
+}
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/21 00:32
+ * @Description 观察下线程的命名操作, 线程的休眠, 线程的优先级
+ *                      线程的所有操作方法几乎都在 Thread 类中定义好了
+ *                      1. 线程的命名和取的
+ *                          1.1 从本质上来说, 多线程的运行状态并不是固定的, 要想确定线程的执行, 唯一的区别就在线程的名称上。在起名时尽可能避免重名, 或者避免改名
+ *                          1.2 在 Thread 中有如下方法可以进行线程的命名及修改操作:
+ *                              构造方法: public Thread(Runnable target, String name)
+ *                              设置名字: public final void setName(String name)
+ *                              取的名字: public final String getName()
+ *                              既然线程的执行本身是不确定的状态, 所以如果要取的线程的名字的话, 那么唯一能做到的就是取得当前线程的名字: public static Thread currentThread(),
+ *                              如果在设置线程对象时没有给定名称, 会有默认值
+ **/
+class MyThread4 implements Runnable{
+
+    @Override
+    public void run() {
+        Stream.iterate(0, i -> ++i).limit(10).forEach(i -> System.out.println(Thread.currentThread().getName() + ", X=" + i));
     }
 }
 
