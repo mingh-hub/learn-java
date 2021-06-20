@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @ClassName BinaryTreeExampleTest
@@ -38,21 +39,40 @@ public class BinaryTreeExampleTest {
 
     @Test
     @DisplayName("从二叉树中删除指定结点")
-    public void testRemove() {
-        BinaryTreeExample<Person> middleBinaryTree = new BinaryTreeExample<>();
-        middleBinaryTree.add(Person.builder().name("A").age(30).build());
-        middleBinaryTree.add(Person.builder().name("B").age(25).build());
-        middleBinaryTree.add(Person.builder().name("C").age(38).build());
-        middleBinaryTree.add(Person.builder().name("D").age(20).build());
-        middleBinaryTree.add(Person.builder().name("E").age(28).build());
-        middleBinaryTree.add(Person.builder().name("F").age(33).build());
-        middleBinaryTree.add(Person.builder().name("G").age(46).build());
-        middleBinaryTree.add(Person.builder().name("H").age(15).build());
-        middleBinaryTree.add(Person.builder().name("I").age(22).build());
-        middleBinaryTree.add(Person.builder().name("J").age(32).build());
-        System.out.println(JSON.toJSONString(middleBinaryTree));
-        middleBinaryTree.remove(Person.builder().name("F").age(33).build());
-        System.out.println(JSON.toJSONString(middleBinaryTree));
+    public void testRemove() throws Exception {
+        System.err.println("============================原始数据============================");
+        System.out.println(JSON.toJSONString("原始数据" + getTree()));
+        Thread.sleep(100);
+        // 删除叶子结点
+        System.err.println("============================删除叶子结点============================");
+        BinaryTreeExample<Person> tree1 = getTree();
+        tree1.remove(Person.builder().name("J").age(32).build());
+        System.out.println("删除叶子结点后的数据为: " + JSON.toJSONString(tree1));
+        assertEquals(tree1.getRoot().getRight().getLeft().getData(), Person.builder().name("F").age(33).build());
+        assertNull(tree1.getRoot().getRight().getLeft().getRight());
+        Thread.sleep(100);
+        // 删除只有左子树的结点
+        System.err.println("============================删除只有左子树的结点============================");
+        BinaryTreeExample<Person> tree2 = getTree();
+        tree2.remove(Person.builder().name("F").age(33).build());
+        System.out.println("删除只有左子树的结点后数据为: " + JSON.toJSONString(tree2));
+        assertEquals(Person.builder().name("J").age(32).build(), tree2.getRoot().getRight().getLeft().getData());
+        Thread.sleep(100);
+        // 删除只有右子树的结点
+        System.err.println("============================删除只有右子树的结点============================");
+        BinaryTreeExample<Person> tree3 = getTree();
+        tree3.remove(Person.builder().name("G").age(46).build());
+        System.out.println("删除只有右子树的结点后数据为: " + JSON.toJSONString(tree3));
+        assertEquals(Person.builder().name("K").age(58).build(), tree3.getRoot().getRight().getRight().getData());
+        assertNull(tree3.getRoot().getRight().getRight().getRight());
+        Thread.sleep(100);
+        // 删除既有左子树又有右子树的结点
+        System.err.println("=========================删除既有左子树又有右子树的结点=========================");
+        BinaryTreeExample<Person> tree4 = getTree();
+        tree4.remove(Person.builder().name("B").age(25).build());
+        System.out.println("删除既有左子树又有右子树的结点后数据为: " + JSON.toJSONString(tree4));
+        assertEquals(Person.builder().name("E").age(28).build(), tree4.getRoot().getLeft().getData());
+        assertEquals(Person.builder().name("D").age(20).build(), tree4.getRoot().getLeft().getLeft().getData());
     }
 
     @Test
@@ -102,5 +122,21 @@ public class BinaryTreeExampleTest {
         assertEquals(Person.builder().name("李四").age(28).build(), middleBinaryTree2.getRoot().getData());
         assertEquals(Person.builder().name("张三").age(22).build(), middleBinaryTree2.getRoot().getLeft().getData());
         assertEquals(Person.builder().name("王五").age(12).build(), middleBinaryTree2.getRoot().getLeft().getLeft().getData());
+    }
+
+    private BinaryTreeExample<Person> getTree() {
+        BinaryTreeExample<Person> tree = new BinaryTreeExample<>();
+        tree.add(Person.builder().name("A").age(30).build());
+        tree.add(Person.builder().name("B").age(25).build());
+        tree.add(Person.builder().name("C").age(38).build());
+        tree.add(Person.builder().name("D").age(20).build());
+        tree.add(Person.builder().name("E").age(28).build());
+        tree.add(Person.builder().name("F").age(33).build());
+        tree.add(Person.builder().name("G").age(46).build());
+        tree.add(Person.builder().name("H").age(15).build());
+        tree.add(Person.builder().name("I").age(22).build());
+        tree.add(Person.builder().name("J").age(32).build());
+        tree.add(Person.builder().name("K").age(58).build());
+        return tree;
     }
 }

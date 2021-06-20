@@ -138,19 +138,27 @@ public class BinaryTreeExample<T extends Comparable<T>> {
             this.data = data;
         }
 
+        public Node(T data, Node parent, Node left, Node right) {
+            this.data = data;
+            this.parent = parent;
+            this.left = left;
+            this.right = right;
+        }
+
         /**
          * @Author Hai.Ming
          * @Date 2021/6/19 16:13
          * @Description 移除指定结点, 指定结点被移除后, 其指定后裔也会被移除
          **/
         public void removeNode(Node node) {
+            // 找左子树
             if (this.data.compareTo(node.data) > 0) {
                 this.left.removeNode(node);
             }
             if (this.data.compareTo(node.data) == 0) {
                 // 叶子结点
                 if (this.left == null && this.right == null) {
-                    if (this == this.parent.left) {
+                    if (this.data.compareTo(this.parent.left.data) == 0) {
                         this.parent.left = null;
                     } else {
                         this.parent.right = null;
@@ -177,20 +185,36 @@ public class BinaryTreeExample<T extends Comparable<T>> {
                 // 分支结点(既有左子树又有右子树)
                 if (this.left != null && this.right != null) {
                     if (this.data.compareTo(this.parent.left.data) == 0) {  // 删除结点为父结点左子树
-                        // TODO: 2021/6/19 需要找出 this.right 中最小的叶子结点, 然后th.left 放到其左结点
-                        // TODO: 2021/6/20 重置父结点
+                        // 右子树替换原结点
                         this.parent.left = this.right;
-                        this.right.left = this.left;
                     } else {  // 删除结点为父结点右子树
-                        // TODO: 2021/6/19 需要找出 this.right 中最小的叶子结点, 然后th.left 放到其左结点
-                        // TODO: 2021/6/20 重置父结点
+                        // 右子树替换原结点
                         this.parent.right = this.right;
                     }
+                    // 右结点父结点替换
+                    this.right.parent = this.parent;
+                    // 找出要删除结点右子树的最小结点
+                    Node minNode = searchMinNode(this.right);
+                    minNode.left = this.left;
+                    this.left.parent = minNode;
                 }
             }
+            // 找右子树
             if (this.data.compareTo(node.data) < 0) {
                 this.right.removeNode(node);
             }
+        }
+
+        /**
+         * @Author Hai.Ming
+         * @Date 2021/6/20 14:37
+         * @Description 找出指定结点的最小结点
+         **/
+        public Node searchMinNode(Node node) {
+            if (node == null || node.left == null) {
+                return node;
+            }
+            return searchMinNode(node.left);
         }
 
         /**
@@ -221,7 +245,7 @@ public class BinaryTreeExample<T extends Comparable<T>> {
             if (this.data.compareTo(newNode.getData()) > 0) {
                 if (this.left == null) {
                     this.left = newNode;
-                    this.left.parent = this;  // 父结点的设置必须用 this
+                    this.left.parent = this;
                     count++;
                 } else {
                     this.left.addNode(newNode);
