@@ -84,16 +84,54 @@ public class ThreadExample {
 //        new Thread(mt4, "线程C").start();
 
         // 观察线程的优先级
-        Thread max = new Thread(new MyThread5(), "线程A");
-        max.setPriority(Thread.MAX_PRIORITY);
-        Thread normal = new Thread(new MyThread5(), "线程B");
-        normal.setPriority(Thread.NORM_PRIORITY);
-        Thread min = new Thread(new MyThread5(), "线程C");
-        min.setPriority(Thread.MIN_PRIORITY);
-        max.start();
-        normal.start();
-        min.start();
-        System.out.println("主线程优先级=====>" + Thread.currentThread().getPriority());
+//        Thread max = new Thread(new MyThread5(), "线程A");
+//        max.setPriority(Thread.MAX_PRIORITY);
+//        Thread normal = new Thread(new MyThread5(), "线程B");
+//        normal.setPriority(Thread.NORM_PRIORITY);
+//        Thread min = new Thread(new MyThread5(), "线程C");
+//        min.setPriority(Thread.MIN_PRIORITY);
+//        max.start();
+//        normal.start();
+//        min.start();
+//        System.out.println("主线程优先级=====>" + Thread.currentThread().getPriority());
+
+        // 观察线程同步问题
+        MyThread6 myThread6 = new MyThread6();
+        Thread t1 = new Thread(myThread6, "线程A");
+        Thread t2 = new Thread(myThread6, "线程B");
+        Thread t3 = new Thread(myThread6, "线程C");
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/22 22:59
+ * @Description 观察线程同步问题
+ *                      1. 以卖票为例, 票数属于公共资源, 多个线程访问统一资源时, 需要考虑同步问题
+ *                      2. 票数的检查和卖票两个动作应该是原子操作, 否则可能出现多卖的问题
+ *                      3. 可以使用同步代码块或者同步方法来处理
+ **/
+class MyThread6 implements Runnable {
+
+    private int ticket = 5;
+
+    @Override
+    public void run() {
+        Stream.iterate(0, i -> ++i).limit(10).forEach(i -> {
+            synchronized (this) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (this.ticket > 0) {
+                    System.out.println(Thread.currentThread().getName() + "开始卖票, ticket=" + ticket--);
+                }
+            }
+        });
     }
 }
 
