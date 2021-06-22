@@ -1,7 +1,6 @@
 package com.mingh.learn.thread;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
 import java.util.stream.Stream;
 
 /**
@@ -79,12 +78,51 @@ public class ThreadExample {
 //        System.out.println("task3 execute result: " + task3.get());
 
         // 观察线程的命名及取的
-        MyThread4 mt1 = new MyThread4();
-        MyThread4 mt2 = new MyThread4();
-        MyThread4 mt3 = new MyThread4();
-        new Thread(mt1, "线程A").start();
-        new Thread(mt2, "线程B").start();
-        new Thread(mt3, "线程C").start();
+//        MyThread4 mt4 = new MyThread4();
+//        new Thread(mt4, "线程A").start();
+//        new Thread(mt4, "线程B").start();
+//        new Thread(mt4, "线程C").start();
+
+        // 观察线程的优先级
+        Thread max = new Thread(new MyThread5(), "线程A");
+        max.setPriority(Thread.MAX_PRIORITY);
+        Thread normal = new Thread(new MyThread5(), "线程B");
+        normal.setPriority(Thread.NORM_PRIORITY);
+        Thread min = new Thread(new MyThread5(), "线程C");
+        min.setPriority(Thread.MIN_PRIORITY);
+        max.start();
+        normal.start();
+        min.start();
+        System.out.println("主线程优先级=====>" + Thread.currentThread().getPriority());
+    }
+}
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/22 19:53
+ * @Description 观察下线程的优先级
+ *                      1. 理论上来说, 优先级越高的线程越有可能先执行。而在 Thread 类中定义有以下设置优先级的方法:
+ *                          设置优先级: public final void setPriority(int newPriority)
+ *                          取的优先级: public final int getPriority()
+ *                      2. 对于优先级定义有三种
+ *                          最高优先级: public static final int MAX_PRIORITY-10
+ *                          一般优先级: public static final int NORM_PRIORITY-5
+ *                          最低优先级: public static final int MIN_PRIORITY-1
+ *                      3. 主线程的优先级是多少?
+ *                          NORM_PRIORITY
+ **/
+class MyThread5 implements Runnable{
+
+    @Override
+    public void run() {
+        Stream.iterate(0, i -> ++i).limit(15).forEach(i -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName() + ", X=" + i);
+        });
     }
 }
 
