@@ -165,6 +165,17 @@ class LSP {
  *      3. 任何类都不应该从具体类派生
  *      4. 使用继承时尽量遵循里氏代换原则
  **/
-class DIP{
+class DIP {
 
+}
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/29 08:28
+ * @Description 接口隔离原则-ISP(Interface Segregation Principle)
+ *  定义:
+ *      使用多个专门的接口, 而不使用单一总接口, 即客户端不应该依赖那些它不需要的接口。
+ **/
+class ISP {
+    
 }
