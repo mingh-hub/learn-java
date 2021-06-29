@@ -55,9 +55,10 @@ public interface DesignExample {
     /**
      * @Author:  Hai.Ming
      * @Date:  2021/6/24 0:26
-     * @Description:  设计模式的六大原则 ★★★★★
+     * @Description:  设计模式的七大原则 ★★★★★
      *
-     * 参考: https://blog.csdn.net/yucaixiang/article/details/90239817
+     * 参考:
+     *      https://blog.csdn.net/yucaixiang/article/details/90239817
      *
      */
     void designPrinciple();
@@ -200,4 +201,17 @@ class DIP {
  **/
 class ISP {
 
+}
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/29 23:30
+ * @Description 迪米特法则-LoD(Law of  Demeter)
+ *  定义:
+ *      一个软件实体因尽可能少的与其它实体发生相互作用。
+ *  理解:
+ *
+ **/
+class LoD{
+    
 }
