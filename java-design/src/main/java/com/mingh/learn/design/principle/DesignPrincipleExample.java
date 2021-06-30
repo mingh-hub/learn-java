@@ -238,6 +238,11 @@ class LoD{
  *      1. 继承给程序带来了侵入性
  *      2. 使程序的可移植性降低
  *      3. 增加了对象之间的耦合性
+ *  理解:
+ *      1. 组合是 contains-A 的关系, 是一种强关系。比如一个人的手脚就是组合关系, 缺一不可。
+ *      2. 聚合是 has-A 的关系, 是一种弱关系。人群中的人就是聚合关系, 一人离开了, 人群还是存在的, 只是不再包含离开的人而已
+ *      3. 通过组合聚合也能达到复用的目的, 但是这种复用是黑箱复用, 不需要知道细节; 继承的复用是白箱复用, 父类的细节会暴露给子类
+ *      4. 当两个实体之间是 is-A 的关系, 可以使用继承来达到复用的目的
  **/
 class CRP {
 
@@ -248,7 +253,7 @@ class CRP {
      **/
     static class DBConnection{
         public String getConnection() {
-            return "获取数据库连接";
+            return "get database connection";
         }
     }
 
@@ -302,7 +307,7 @@ class CRP {
 
         public void addProduct() {
             String database = connection.getConnection();
-            System.out.println("get " + database + " database");
+            System.out.println("get " + database + " database connection");
             System.out.println("product added to " + database);
         }
     }
