@@ -226,3 +226,90 @@ class ISP {
 class LoD{
     
 }
+
+/**
+ * @Author Hai.Ming
+ * @Date 2021/6/30 21:58
+ * @Description 合成复用原则-CRP(Composite Reuse Principle)
+ *  定义:
+ *      尽量使用对象的组合/聚合, 而不是使用继承关系来达到软件的复用性
+ *  思考: 为什么不推荐使用继承关系来达到软件的复用性
+ *      在 LSP 原则中有说到, 继承要遵循里氏代换原则。继承固然能给程序带来巨大的便利, 但也有其局限性。如:
+ *      1. 继承给程序带来了侵入性
+ *      2. 使程序的可移植性降低
+ *      3. 增加了对象之间的耦合性
+ **/
+class CRP {
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/30 22:46
+     * @Description 通过继承的方式来展现软件的复用性
+     **/
+    static class DBConnection{
+        public String getConnection() {
+            return "获取数据库连接";
+        }
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/30 22:51
+     * @Description 如果后续需求要更换数据库, 就得修改 DBConnection, 这个就违背了开闭原则
+     **/
+    static class ProductDao extends DBConnection {
+        public void addProduct() {
+            getConnection();
+            System.out.println("DB operation");
+        }
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/30 22:53
+     * @Description 利用合成复用原则达到软件的复用性
+     **/
+    abstract static class CRPDBConnection {
+        public abstract String getConnection();
+    }
+
+    static class MySqlDBConnection extends CRPDBConnection {
+        @Override
+        public String getConnection() {
+            return "mysql";
+        }
+    }
+
+    /**
+     * @Author Hai.Ming
+     * @Date 2021/6/30 23:06
+     * @Description 如果要更换成 Oracle 数据库, 直接增加一个 OracleDBConnection 即可。新增代替修改, 符合开闭原则
+     **/
+    static class OracleDBConnection extends CRPDBConnection{
+        @Override
+        public String getConnection() {
+            return "oracle";
+        }
+    }
+
+    static class CRPProductDao{
+
+        private final CRPDBConnection connection;
+
+        public CRPProductDao(CRPDBConnection connection) {
+            this.connection = connection;
+        }
+
+        public void addProduct() {
+            String database = connection.getConnection();
+            System.out.println("get " + database + " database");
+            System.out.println("product added to " + database);
+        }
+    }
+
+    public static void main(String[] args) {
+        CRPDBConnection connection = new OracleDBConnection();
+        CRPProductDao dao = new CRPProductDao(connection);
+        dao.addProduct();
+    }
+}
