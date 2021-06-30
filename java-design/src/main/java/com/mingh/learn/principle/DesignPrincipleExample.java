@@ -1,4 +1,4 @@
-package com.mingh.learn;
+package com.mingh.learn.principle;
 
 /**
  * @ClassName DesignExample
