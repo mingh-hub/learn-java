@@ -7,7 +7,7 @@ package com.mingh.learn;
  * @Version 1.0
  * @Description 设计模式 ★★★★★
  */
-public interface DesignExample {
+public interface DesignPrincipleExample {
 
     /**
      * @Author:  Hai.Ming
