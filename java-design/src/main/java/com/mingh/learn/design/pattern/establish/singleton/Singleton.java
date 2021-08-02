@@ -27,7 +27,7 @@ package com.mingh.learn.design.pattern.establish.singleton;
  *                              1.3 保值器
  *                              1.4 备份
  *                          2. 多线程环境下如何保证单例模式的安全问题?
- *                              volatile + 双端检索机制
+ *                              volatile + 双端检索机制(DCL)
  */
 public class Singleton {
 
@@ -59,7 +59,7 @@ public class Singleton {
 
     /**
      * 静态工厂方法创建实例, 提供一个全局入口(多线程)
-     * 建议使用双端检索机制, 但在多线程并发的情况下并不一定线程安全。原因是因为指令重排序的存在。
+     * 建议使用双端检索机制(DCL), 但在多线程并发的情况下并不一定线程安全。原因是因为指令重排序的存在。
      * 所以加入 volatile 禁止指令重排序
      * @return 全局唯一实例对象
      */
