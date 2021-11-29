@@ -17,6 +17,7 @@ import java.io.File;
  **/
 @Slf4j
 public class PdfUtils {
+
     /**
      * 经过测试,dpi为96,100,105,120,150,200中,105显示效果较为清晰,体积稳定,dpi越高图片体积越大,一般电脑显示分辨率为96
      **/
