@@ -7,9 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileInputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class HelloWorld {
@@ -17,11 +16,31 @@ public class HelloWorld {
     private static final long DEFAULT_VALUE = (1L << 11) - 1;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // 查找在 loki 中不存在的 ID 集合
-        findIdsWhichNotInLoki(stringToList(ORDER_IDS_STRING), stringToList(LOKI_IDS_STRING));
+//        findIdsWhichNotInLoki(stringToList(ORDER_IDS_STRING), stringToList(LOKI_IDS_STRING));
+//
+//
+//        Map<String, Object> map = new HashMap<>();
+//        map.putIfAbsent("key", "value");
+//
+//        Collections.synchronizedList(new ArrayList<>());
 
+        Timer timer = new Timer();
+        timer.schedule(new ThrowTask(), 1);
+        TimeUnit.SECONDS.sleep(1);
+
+        timer.schedule(new ThrowTask(), 5);
+        TimeUnit.SECONDS.sleep(5);
+
+    }
+
+    static class ThrowTask extends TimerTask {
+        @Override
+        public void run() {
+            throw new RuntimeException("==========> 手动抛出异常");
+        }
     }
 
     /**
